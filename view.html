@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Salary DB Story</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 16px;
+    padding: 24px;
+  }
+  #controls {
+    display: flex;
+    gap: 10px;
+  }
+  button {
+    background: #EDEBE4;
+    color: #373930;
+    border: none;
+    padding: 10px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 0.06em;
+  }
+  button:hover { background: #d8d5cc; }
+  #status { color: #666; font-family: 'DM Sans', sans-serif; font-size: 12px; }
+  #wrapper {
+    width: 405px;
+    height: 720px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  }
+  canvas { width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+
+<div id="controls">
+  <button onclick="loadAndDraw()">↻ Refresh</button>
+  <button onclick="exportPNG()">⬇ Download PNG</button>
+</div>
+<div id="status">Loading live data…</div>
+
+<div id="wrapper"><canvas id="c"></canvas></div>
+
+<script>
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbx6IjQ_PA67Zky5BsOZGObx8aXpEVl2gIbBlQkGdHxC7gkVbQwcX0oM9LezI2Zss0zv-w/exec';
+const W = 1080, H = 1920;
+const OLIVE = '#373930';
+const LINEN = '#EDEBE4';
+const WARM  = '#C4C0B3';
+const MUTED = '#8B8C7A';
+
+function fetchData() {
+  return new Promise((resolve, reject) => {
+    const cb = 'cb_' + Date.now();
+    const script = document.createElement('script');
+    const timer = setTimeout(() => { delete window[cb]; script.remove(); reject(new Error('Timeout')); }, 20000);
+    window[cb] = (data) => { clearTimeout(timer); delete window[cb]; script.remove(); resolve(data); };
+    script.src = `${ENDPOINT}?action=getAll&callback=${cb}`;
+    document.head.appendChild(script);
+  });
+}
+
+function computeStats(rows) {
+  const cities = new Set(), countries = new Set();
+  let count = 0;
+  rows.forEach(row => {
+    if (!row || row.length < 5) return;
+    if (String(row[0]).toLowerCase().includes('submitted')) return;
+    count++;
+    const city    = String(row[4] || '').trim();
+    const country = String(row[3] || '').trim();
+    if (city    && city    !== 'undefined') cities.add(city.toLowerCase());
+    if (country && country !== 'undefined') countries.add(country.toLowerCase());
+  });
+  return { count, cities: cities.size, countries: countries.size };
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+}
+
+async function draw(stats) {
+  const canvas = document.getElementById('c');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  await document.fonts.ready;
+
+  // ── Background: linen ──
+  ctx.fillStyle = LINEN;
+  ctx.fillRect(0, 0, W, H);
+
+  // Subtle grain
+  for (let i = 0; i < 22000; i++) {
+    ctx.fillStyle = `rgba(55,57,48,${Math.random() * 0.028})`;
+    ctx.fillRect(Math.random()*W, Math.random()*H, 1.2, 1.2);
+  }
+
+  // ── Header area ──
+  ctx.textAlign = 'center';
+
+  // Eyebrow
+  ctx.fillStyle = MUTED;
+  ctx.font = '300 34px "DM Sans"';
+  ctx.letterSpacing = '0.22em';
+  ctx.fillText('STUDIO SALARY DATABASE', W/2, 210);
+
+  // Thin rule
+  ctx.strokeStyle = WARM;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(120, 250); ctx.lineTo(W-120, 250); ctx.stroke();
+
+  // Main headline
+  ctx.fillStyle = OLIVE;
+  ctx.font = 'italic 600 118px "Cormorant Garamond"';
+  ctx.letterSpacing = '-1px';
+  ctx.fillText('by the numbers', W/2, 370);
+
+  // ── Single card ──
+  const cardX = 72, cardY = 440;
+  const cardW = W - 144, cardH = 960;
+
+  // Card shadow
+  ctx.shadowColor = 'rgba(55,57,48,0.18)';
+  ctx.shadowBlur = 60;
+  ctx.shadowOffsetY = 20;
+
+  ctx.fillStyle = OLIVE;
+  roundRect(ctx, cardX, cardY, cardW, cardH, 20);
+  ctx.fill();
+
+  ctx.shadowColor = 'transparent';
+  ctx.shadowBlur = 0;
+  ctx.shadowOffsetY = 0;
+
+  // ── Three stats inside card ──
+  const stats_data = [
+    { value: stats.count,     label: 'instructor submissions' },
+    { value: stats.cities,    label: 'cities represented'     },
+    { value: stats.countries, label: 'countries represented'  },
+  ];
+
+  const statH = cardH / 3;
+
+  stats_data.forEach((s, i) => {
+    const sy = cardY + i * statH;
+
+    // Divider between stats (not before first)
+    if (i > 0) {
+      ctx.strokeStyle = 'rgba(200,196,179,0.2)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(cardX + 80, sy); ctx.lineTo(cardX + cardW - 80, sy); ctx.stroke();
+    }
+
+    // Big number
+    ctx.fillStyle = LINEN;
+    ctx.textAlign = 'center';
+    ctx.font = '600 220px "Cormorant Garamond"';
+    ctx.letterSpacing = '-6px';
+    ctx.fillText(s.value.toLocaleString(), W/2, sy + statH * 0.6);
+
+    // Label
+    ctx.fillStyle = WARM;
+    ctx.font = '300 38px "DM Sans"';
+    ctx.letterSpacing = '0.1em';
+    ctx.fillText(s.label.toUpperCase(), W/2, sy + statH * 0.78);
+  });
+
+  // ── Footer ──
+  // Thin rule
+  ctx.strokeStyle = WARM;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(120, H-310); ctx.lineTo(W-120, H-310); ctx.stroke();
+
+  ctx.fillStyle = OLIVE;
+  ctx.font = 'italic 400 68px "Cormorant Garamond"';
+  ctx.letterSpacing = '0px';
+  ctx.textAlign = 'center';
+  ctx.fillText('Real data. Real pay.', W/2, H-210);
+
+  ctx.fillStyle = MUTED;
+  ctx.font = '300 30px "DM Sans"';
+  ctx.letterSpacing = '0.15em';
+  ctx.fillText('PAIGELOVESPILATES.COM', W/2, H-140);
+
+  // Dots
+  ctx.fillStyle = WARM;
+  [-1, 0, 1].forEach(d => {
+    ctx.beginPath();
+    ctx.arc(W/2 + d * 30, H - 82, 5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+async function loadAndDraw() {
+  const status = document.getElementById('status');
+  status.textContent = 'Fetching live data…';
+  try {
+    const data = await fetchData();
+    let rows = [];
+    if (Array.isArray(data)) rows = data;
+    else if (data.instructors) rows = data.instructors;
+    else if (data.rows) rows = data.rows;
+    else { const k = Object.keys(data).find(k => Array.isArray(data[k])); if (k) rows = data[k]; }
+    const stats = computeStats(rows);
+    status.textContent = `Live: ${stats.count} submissions · ${stats.cities} cities · ${stats.countries} countries`;
+    await draw(stats);
+  } catch(err) {
+    status.textContent = 'Live fetch failed — showing preview numbers';
+    await draw({ count: 400, cities: 85, countries: 6 });
+  }
+}
+
+function exportPNG() {
+  const a = document.createElement('a');
+  a.download = 'paige-salary-db-story.png';
+  a.href = document.getElementById('c').toDataURL('image/png');
+  a.click();
+}
+
+loadAndDraw();
+</script>
+
+</body>
+</html>
