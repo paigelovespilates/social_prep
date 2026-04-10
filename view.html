@@ -1,216 +1,149 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Salary DB Story</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yogi Fair Pay Carousel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: #1e1e1e;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    gap: 16px;
-    padding: 24px;
-  }
-  #controls { display: flex; gap: 10px; align-items: center; }
-  button {
-    background: #EDEBE4;
-    color: #373930;
-    border: none;
-    padding: 10px 22px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 4px;
-    letter-spacing: 0.06em;
-  }
-  button:hover { background: #d8d5cc; }
-  #status { color: #888; font-family: 'DM Sans', sans-serif; font-size: 12px; }
-  #wrapper {
-    width: 405px;
-    height: 720px;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
-  }
-  canvas { width: 100%; height: 100%; display: block; }
+
+body {
+width: 1080px;
+height: 1080px;
+background: #EDEBE4;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Playfair Display’, serif;
+overflow: hidden;
+}
+
+.slide {
+width: 1080px;
+height: 1080px;
+background: #EDEBE4;
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 100px;
+}
+
+/* Corner decorative lines */
+.corner {
+position: absolute;
+width: 60px;
+height: 60px;
+}
+.corner–tl { top: 60px; left: 60px; border-top: 1.5px solid #373930; border-left: 1.5px solid #373930; }
+.corner–tr { top: 60px; right: 60px; border-top: 1.5px solid #373930; border-right: 1.5px solid #373930; }
+.corner–bl { bottom: 60px; left: 60px; border-bottom: 1.5px solid #373930; border-left: 1.5px solid #373930; }
+.corner–br { bottom: 60px; right: 60px; border-bottom: 1.5px solid #373930; border-right: 1.5px solid #373930; }
+
+.eyebrow {
+font-family: ‘DM Sans’, sans-serif;
+font-weight: 300;
+font-size: 22px;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+color: #373930;
+opacity: 0.6;
+margin-bottom: 52px;
+}
+
+.headline {
+font-family: ‘Playfair Display’, serif;
+font-size: 108px;
+line-height: 1.0;
+color: #373930;
+text-align: center;
+font-weight: 500;
+max-width: 860px;
+}
+
+.headline em {
+font-style: italic;
+font-weight: 400;
+}
+
+.rule {
+width: 48px;
+height: 1.5px;
+background: #373930;
+margin: 60px auto;
+opacity: 0.4;
+}
+
+.sub {
+font-family: ‘DM Sans’, sans-serif;
+font-weight: 300;
+font-size: 24px;
+letter-spacing: 0.04em;
+color: #373930;
+text-align: center;
+opacity: 0.7;
+line-height: 1.6;
+}
+
+.handle {
+position: absolute;
+bottom: 72px;
+right: 80px;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 20px;
+font-weight: 300;
+letter-spacing: 0.08em;
+color: #373930;
+opacity: 0.45;
+}
+
+/* Subtle background texture dot */
+.bg-circle {
+position: absolute;
+width: 480px;
+height: 480px;
+border-radius: 50%;
+border: 1px solid #373930;
+opacity: 0.06;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+pointer-events: none;
+}
+.bg-circle-2 {
+width: 700px;
+height: 700px;
+opacity: 0.04;
+}
 </style>
+
 </head>
 <body>
+<div class="slide">
 
-<div id="controls">
-  <button onclick="loadAndDraw()">↻ Refresh</button>
-  <button onclick="exportPNG()">⬇ Download PNG</button>
+  <div class="bg-circle"></div>
+  <div class="bg-circle bg-circle-2"></div>
+
+  <div class="corner corner--tl"></div>
+  <div class="corner corner--tr"></div>
+  <div class="corner corner--bl"></div>
+  <div class="corner corner--br"></div>
+
+  <p class="eyebrow">pay transparency</p>
+
+  <h1 class="headline">
+    yogis deserve<br><em>fair pay</em><br>too
+  </h1>
+
+  <div class="rule"></div>
+
+  <p class="sub">the data is here. let's talk about it.</p>
+
+<span class="handle">@paigelovespilates</span>
+
 </div>
-<div id="status">Loading live data…</div>
-
-<div id="wrapper"><canvas id="c"></canvas></div>
-
-<script>
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbx6IjQ_PA67Zky5BsOZGObx8aXpEVl2gIbBlQkGdHxC7gkVbQwcX0oM9LezI2Zss0zv-w/exec';
-const W = 1080, H = 1920;
-const OLIVE = '#373930';
-const LINEN = '#EDEBE4';
-const WARM  = '#C4C0B3';
-const MUTED = '#8B8C7A';
-
-function fetchStats() {
-  return new Promise((resolve, reject) => {
-    const cb = 'cb_' + Date.now();
-    const script = document.createElement('script');
-    const timer = setTimeout(() => {
-      delete window[cb]; script.remove();
-      reject(new Error('Timeout'));
-    }, 20000);
-    window[cb] = (data) => {
-      clearTimeout(timer); delete window[cb]; script.remove();
-      resolve(data);
-    };
-    script.src = `${ENDPOINT}?callback=${cb}`;
-    document.head.appendChild(script);
-  });
-}
-
-function roundRect(ctx, x, y, w, h, r) {
-  ctx.beginPath();
-  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
-  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-  ctx.lineTo(x+w,y+h-r);
-  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-  ctx.lineTo(x+r,y+h);
-  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-  ctx.lineTo(x,y+r);
-  ctx.quadraticCurveTo(x,y,x+r,y);
-  ctx.closePath();
-}
-
-async function draw(stats) {
-  const canvas = document.getElementById('c');
-  canvas.width = W; canvas.height = H;
-  const ctx = canvas.getContext('2d');
-  await document.fonts.ready;
-
-  ctx.fillStyle = LINEN;
-  ctx.fillRect(0, 0, W, H);
-
-  for (let i = 0; i < 22000; i++) {
-    ctx.fillStyle = `rgba(55,57,48,${Math.random() * 0.028})`;
-    ctx.fillRect(Math.random()*W, Math.random()*H, 1.2, 1.2);
-  }
-
-  ctx.textAlign = 'center';
-
-  ctx.fillStyle = MUTED;
-  ctx.font = '300 34px "DM Sans"';
-  ctx.letterSpacing = '0.22em';
-  ctx.fillText('STUDIO SALARY DATABASE', W/2, 210);
-
-  ctx.strokeStyle = WARM;
-  ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.moveTo(120, 255); ctx.lineTo(W-120, 255); ctx.stroke();
-
-  ctx.fillStyle = OLIVE;
-  ctx.font = 'italic 600 118px "Cormorant Garamond"';
-  ctx.letterSpacing = '-1px';
-  ctx.fillText('by the numbers', W/2, 375);
-
-  const cardX = 72, cardY = 450;
-  const cardW = W - 144, cardH = 980;
-
-  ctx.shadowColor = 'rgba(55,57,48,0.18)';
-  ctx.shadowBlur = 60;
-  ctx.shadowOffsetY = 20;
-  ctx.fillStyle = OLIVE;
-  roundRect(ctx, cardX, cardY, cardW, cardH, 20);
-  ctx.fill();
-  ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
-
-  const statsData = [
-    { value: stats.instructorCount, label: 'instructor submissions' },
-    { value: stats.cities,          label: 'cities represented'     },
-    { value: stats.countries,       label: 'countries represented'  },
-  ];
-
-  const statH = cardH / 3;
-
-  statsData.forEach((s, i) => {
-    const sy = cardY + i * statH;
-
-    if (i > 0) {
-      ctx.strokeStyle = 'rgba(200,196,179,0.2)';
-      ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(cardX+80, sy); ctx.lineTo(cardX+cardW-80, sy); ctx.stroke();
-    }
-
-    ctx.fillStyle = LINEN;
-    ctx.textAlign = 'center';
-    ctx.font = '600 220px "Cormorant Garamond"';
-    ctx.letterSpacing = '-6px';
-    ctx.fillText(s.value.toLocaleString(), W/2, sy + statH * 0.6);
-
-    ctx.fillStyle = WARM;
-    ctx.font = '300 38px "DM Sans"';
-    ctx.letterSpacing = '0.1em';
-    ctx.fillText(s.label.toUpperCase(), W/2, sy + statH * 0.78);
-  });
-
-  ctx.strokeStyle = WARM;
-  ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.moveTo(120, H-310); ctx.lineTo(W-120, H-310); ctx.stroke();
-
-  ctx.fillStyle = OLIVE;
-  ctx.font = 'italic 400 68px "Cormorant Garamond"';
-  ctx.letterSpacing = '0px';
-  ctx.textAlign = 'center';
-  ctx.fillText('Real data. Real pay.', W/2, H-210);
-
-  ctx.fillStyle = MUTED;
-  ctx.font = '300 30px "DM Sans"';
-  ctx.letterSpacing = '0.15em';
-  ctx.fillText('PAIGELOVESPILATES.COM', W/2, H-140);
-
-  ctx.fillStyle = WARM;
-  [-1, 0, 1].forEach(d => {
-    ctx.beginPath();
-    ctx.arc(W/2 + d*30, H-82, 5, 0, Math.PI*2);
-    ctx.fill();
-  });
-}
-
-async function loadAndDraw() {
-  const status = document.getElementById('status');
-  status.textContent = 'Fetching live data…';
-  try {
-    const data = await fetchStats();
-
-    // instructor array includes header row at [0], so subtract 1
-    const instructorCount = Math.max(0, (data.instructor || []).length - 1);
-
-    const stats = {
-      instructorCount,
-      cities:    data.stats.cities,
-      countries: data.stats.countries,
-    };
-
-    status.textContent = `Live: ${stats.instructorCount} submissions · ${stats.cities} cities · ${stats.countries} countries`;
-    await draw(stats);
-  } catch(err) {
-    status.textContent = 'Live fetch failed: ' + err.message;
-    console.error(err);
-  }
-}
-
-function exportPNG() {
-  const a = document.createElement('a');
-  a.download = 'paige-salary-db-story.png';
-  a.href = document.getElementById('c').toDataURL('image/png');
-  a.click();
-}
-
-loadAndDraw();
-</script>
 </body>
 </html>
