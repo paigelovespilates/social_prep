@@ -4,167 +4,373 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yogi Fair Pay Carousel</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<title>Stories That Caught My Eye — Carousel Export</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-width: 1080px;
-height: 1080px;
-background: #EDEBE4;
-display: flex;
-align-items: center;
-justify-content: center;
-font-family: ‘Playfair Display’, serif;
-overflow: hidden;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#f5f3ef;padding:20px;color:#373930}
+.controls{text-align:center;margin-bottom:16px}
+.controls button{
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  padding:10px 20px;margin:4px;border:1px solid #373930;background:#373930;
+  color:#EDEBE4;border-radius:6px;cursor:pointer;
 }
-
-.slide {
-width: 1080px;
-height: 1080px;
-background: #EDEBE4;
-position: relative;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 100px;
-}
-
-/* Corner decorative lines */
-.corner {
-position: absolute;
-width: 60px;
-height: 60px;
-}
-.corner–tl { top: 60px; left: 60px; border-top: 1.5px solid #373930; border-left: 1.5px solid #373930; }
-.corner–tr { top: 60px; right: 60px; border-top: 1.5px solid #373930; border-right: 1.5px solid #373930; }
-.corner–bl { bottom: 60px; left: 60px; border-bottom: 1.5px solid #373930; border-left: 1.5px solid #373930; }
-.corner–br { bottom: 60px; right: 60px; border-bottom: 1.5px solid #373930; border-right: 1.5px solid #373930; }
-
-.eyebrow {
-font-family: ‘DM Sans’, sans-serif;
-font-weight: 300;
-font-size: 22px;
-letter-spacing: 0.22em;
-text-transform: uppercase;
-color: #373930;
-opacity: 0.6;
-margin-bottom: 52px;
-}
-
-.headline {
-font-family: ‘Playfair Display’, serif;
-font-size: 108px;
-line-height: 1.0;
-color: #373930;
-text-align: center;
-font-weight: 500;
-max-width: 860px;
-}
-
-.headline em {
-font-style: italic;
-font-weight: 400;
-}
-
-.rule {
-width: 48px;
-height: 1.5px;
-background: #373930;
-margin: 60px auto;
-opacity: 0.4;
-}
-
-.sub {
-font-family: ‘DM Sans’, sans-serif;
-font-weight: 300;
-font-size: 24px;
-letter-spacing: 0.04em;
-color: #373930;
-text-align: center;
-opacity: 0.7;
-line-height: 1.6;
-}
-
-.handle {
-position: absolute;
-bottom: 72px;
-right: 80px;
-font-family: ‘DM Sans’, sans-serif;
-font-size: 20px;
-font-weight: 300;
-letter-spacing: 0.08em;
-color: #373930;
-opacity: 0.45;
-}
-
-/* Subtle background texture dot */
-.bg-circle {
-position: absolute;
-width: 480px;
-height: 480px;
-border-radius: 50%;
-border: 1px solid #373930;
-opacity: 0.06;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-pointer-events: none;
-}
-.bg-circle-2 {
-width: 700px;
-height: 700px;
-opacity: 0.04;
-}
-
-#download-btn {
-position: fixed;
-bottom: 24px;
-left: 50%;
-transform: translateX(-50%);
-z-index: 999;
-background: #373930;
-color: #EDEBE4;
-font-family: ‘DM Sans’, sans-serif;
-font-size: 15px;
-font-weight: 400;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-border: none;
-padding: 14px 32px;
-cursor: pointer;
-border-radius: 2px;
-transition: opacity 0.2s;
-}
-#download-btn:hover { opacity: 0.75; }
+.controls button:hover{background:#4a4a40}
+.controls button.outline{background:transparent;color:#373930}
+.controls button.outline:hover{background:#e8e5dc}
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.nav button{width:36px;height:36px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:16px}
+.label{font-size:13px;color:#888}
+#dlStatus{font-size:13px;color:#6a6a5c;margin-top:8px;text-align:center;min-height:20px}
+canvas{display:block;margin:0 auto;border:1px solid #ddd;max-width:100%;height:auto}
 </style>
-
 </head>
 <body>
-<div class="slide">
 
-  <div class="bg-circle"></div>
-  <div class="bg-circle bg-circle-2"></div>
-
-  <div class="corner corner--tl"></div>
-  <div class="corner corner--tr"></div>
-  <div class="corner corner--bl"></div>
-  <div class="corner corner--br"></div>
-
-  <p class="eyebrow">transparency that empowers</p>
-
-  <h1 class="headline">
-    yogis deserve<br>to <em>get paid</em><br>too
-  </h1>
-
-  <div class="rule"></div>
-
-  <p class="sub">Rebuilding the fitness industry with pay transparency</p>
-
-<span class="handle">@paigelovespilates</span>
-
+<div class="nav">
+  <button onclick="go(-1)">‹</button>
+  <span class="label" id="counter">1 / 10</span>
+  <button onclick="go(1)">›</button>
 </div>
+<canvas id="preview" width="540" height="540"></canvas>
+<div id="dlStatus"></div>
+<div class="controls">
+  <button onclick="exportOne()">Export this slide</button>
+  <button id="btnAll" onclick="exportAll()">Export all slides</button>
+</div>
+
+<script>
+const COL = {
+  linen: '#EDEBE4',
+  olive: '#373930',
+  ink: '#2C2B27',
+  muted: '#8a8a7c',
+  accent: '#a09a8c',
+  rule: '#c5c1b8',
+};
+
+const SLIDES = [
+  {
+    studio: 'Firm Body Pilates',
+    location: 'Scottsdale, AZ, United States',
+    sections: [
+      { label: 'OTHER PERKS', text: 'Free workshops hosted at our studio with the owner who is a master trainer, extra hours for photoshoots and videoshoots available' }
+    ]
+  },
+  {
+    studio: 'Drip cycle',
+    location: 'Whittier, CA, United States',
+    sections: [
+      { label: 'OTHER PERKS', text: '25 dollar bonus when you hit 90 percent capacity' }
+    ]
+  },
+  {
+    studio: 'Contour Pilates',
+    location: 'Atlanta, GA, United States',
+    sections: [
+      { label: 'OTHER PERKS', text: 'Annual bonus, free continuing education workshops offered to instructors' }
+    ]
+  },
+  {
+    studio: 'FLX Move',
+    location: 'Skokie, IL, United States',
+    sections: [
+      { label: 'WORKING HERE', text: '$15 a class when you start as a student teacher, $20 upon completion of 20 classes, $25 a class once you finish the training exam' },
+      { label: 'OTHER PERKS', text: 'Free infrared sauna, free massage chair, discount on clothing and other items in the shop' }
+    ]
+  },
+  {
+    studio: 'Club Pilates Tampa',
+    location: 'Tampa, FL, United States',
+    sections: [
+      { label: 'WORKING HERE', text: 'Love it. Owner is the best.' }
+    ]
+  },
+  {
+    studio: 'The studio Lexington',
+    location: 'Lexington, KY, United States',
+    sections: [
+      { label: 'WORKING HERE', text: 'The reformers are from personal hour — which is a drop ship company from China.' },
+      { label: 'OTHER PERKS', text: 'Hired at one rate, changed once opened. And You get fired through a text' }
+    ]
+  },
+  {
+    studio: 'The Body Center',
+    location: 'Newton, MA, United States',
+    sections: [
+      { label: 'WORKING HERE', text: 'Same rate for teaching classes and privates. Classes hardly run lately due to cancellations (4 hr cancel window) so I don\'t get paid' },
+      { label: 'OTHER PERKS', text: 'W2 not 1099!! So rare. Free use of studio' }
+    ]
+  },
+  {
+    studio: 'Bikram Yoga Salt Lake',
+    location: 'Salt Lake City, UT, United States',
+    sections: [
+      { label: 'WORKING HERE', text: 'You start out at $25 or $30, a class, until you\'ve taught 100. Then you get a $5 raise, every 100. Capped at $60.' },
+      { label: 'OTHER PERKS', text: '30% off all studio merch and beverages' }
+    ]
+  },
+  {
+    studio: 'SLT',
+    location: 'New York city, NY, United States',
+    sections: [
+      { label: 'NEGOTIATION NOTES', text: 'Other instructors have had worse experiences than I had; they play favorites with instructors' },
+      { label: 'WORKING HERE', text: 'The treatment towards instructors has been extremely negative lately, especially since the studio itself was bought up by a hedge fund company' },
+      { label: 'OTHER PERKS', text: 'Partnerships with other studios for free classes elsewhere' }
+    ]
+  },
+  {
+    studio: 'Lit From Within',
+    location: 'Redding, CA, United States',
+    sections: [
+      { label: 'NEGOTIATION NOTES', text: 'I was a brand new instructor looking for experience and I have a well paid day job so I suggested trade only.' },
+      { label: 'OTHER PERKS', text: 'Free spray tan, sauna, classes. I\'m only doing trade' }
+    ]
+  }
+];
+
+const LW = 540; // preview logical width
+const EX = 1080; // export size
+
+let cur = 0;
+
+function font(weight, size, family) {
+  family = family || 'DM Sans';
+  return `${weight} ${size}px '${family}', sans-serif`;
+}
+
+function fontItalic(weight, size, family) {
+  family = family || 'Cormorant Garamond';
+  return `italic ${weight} ${size}px '${family}', serif`;
+}
+
+function wrapText(ctx, text, x, maxW, lineH) {
+  const words = text.split(' ');
+  let line = '';
+  const lines = [];
+  for (const w of words) {
+    const test = line ? line + ' ' + w : w;
+    if (ctx.measureText(test).width > maxW && line) {
+      lines.push(line);
+      line = w;
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function fitFontSize(ctx, text, maxW, maxSize, minSize, weight, family) {
+  for (let s = maxSize; s >= minSize; s--) {
+    ctx.font = fontItalic(weight || '700', s, family || 'Cormorant Garamond');
+    if (ctx.measureText(text).width <= maxW) return s;
+  }
+  return minSize;
+}
+
+function measureSections(ctx, sl, textW, bodySize, labelSize, lineH, barPad, sectionGap) {
+  let total = 0;
+  for (let i = 0; i < sl.sections.length; i++) {
+    const sec = sl.sections[i];
+    ctx.font = font('600', labelSize);
+    total += labelSize + barPad; // label + gap to body
+    ctx.font = `400 ${bodySize}px 'Cormorant Garamond', serif`;
+    const lines = wrapText(ctx, sec.text, 0, textW - 4, lineH);
+    total += lines.length * lineH;
+    if (i < sl.sections.length - 1) total += sectionGap;
+  }
+  return total;
+}
+
+function drawSlide(sl, scale) {
+  scale = scale || 1;
+  const S = LW * scale;
+  const cv = document.createElement('canvas');
+  cv.width = S; cv.height = S;
+  const ctx = cv.getContext('2d');
+  ctx.scale(scale, scale);
+
+  // Background
+  ctx.fillStyle = COL.linen;
+  ctx.fillRect(0, 0, LW, LW);
+
+  const pad = 48;
+  const contentW = LW - pad * 2;
+  let y = 48;
+
+  // "STORIES THAT CAUGHT MY EYE" header
+  ctx.font = font('600', 10.5);
+  ctx.fillStyle = COL.muted;
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.letterSpacing = '3px';
+  ctx.fillText('STORIES THAT CAUGHT MY EYE', pad, y);
+  ctx.letterSpacing = '0px';
+  y += 26;
+
+  // Studio name — large italic Cormorant Garamond (same family as body)
+  const nameSize = fitFontSize(ctx, sl.studio, contentW, 48, 28, '700', 'Cormorant Garamond');
+  ctx.font = `italic 700 ${nameSize}px 'Cormorant Garamond', serif`;
+  ctx.fillStyle = COL.ink;
+  ctx.fillText(sl.studio, pad, y);
+  y += nameSize + 14;
+
+  // Location
+  ctx.font = font('400', 15);
+  ctx.fillStyle = COL.muted;
+  ctx.fillText(sl.location, pad, y);
+  y += 60; // generous gap before sections
+
+  // Sections — use Cormorant Garamond for body text (editorial serif feel)
+  const sectionCount = sl.sections.length;
+  const footerH = 48;
+  const availH = LW - y - footerH - 10;
+
+  // Adaptive sizing — try large first, shrink to fit
+  let bodySize, labelSize, sectionGap, barPad, lineH;
+  const textX = pad + 16;
+  const textW = contentW - 16;
+  const barX = pad;
+
+  // Try sizes from large to small
+  const sizes = [
+    { body: 26, label: 10, gap: 32, bpad: 16 },
+    { body: 23, label: 10, gap: 28, bpad: 14 },
+    { body: 20, label: 9.5, gap: 24, bpad: 13 },
+    { body: 18, label: 9, gap: 20, bpad: 12 },
+    { body: 16, label: 8.5, gap: 16, bpad: 10 },
+    { body: 14, label: 8, gap: 14, bpad: 9 },
+  ];
+
+  let chosen = sizes[sizes.length - 1];
+  for (const s of sizes) {
+    const lh = s.body * 1.5;
+    const h = measureSections(ctx, sl, textW, s.body, s.label, lh, s.bpad, s.gap);
+    if (h <= availH) { chosen = s; break; }
+  }
+
+  bodySize = chosen.body;
+  labelSize = chosen.label;
+  sectionGap = chosen.gap;
+  barPad = chosen.bpad;
+  lineH = bodySize * 1.5;
+
+  for (let i = 0; i < sl.sections.length; i++) {
+    const sec = sl.sections[i];
+
+    // Label — spaced caps DM Sans
+    ctx.font = font('600', labelSize);
+    ctx.fillStyle = COL.muted;
+    ctx.letterSpacing = '2.5px';
+    ctx.fillText(sec.label, textX, y);
+    ctx.letterSpacing = '0px';
+    y += labelSize + barPad;
+
+    // Body text — Cormorant Garamond (editorial serif)
+    ctx.font = `400 ${bodySize}px 'Cormorant Garamond', serif`;
+    ctx.fillStyle = COL.ink;
+    const lines = wrapText(ctx, sec.text, textX, textW - 4, lineH);
+
+    // Accent bar — spans label through body
+    const barTop = y - barPad - labelSize - 6;
+    const barBottom = y + lines.length * lineH + 4;
+    ctx.fillStyle = COL.accent;
+    ctx.fillRect(barX, barTop, 3, barBottom - barTop);
+
+    // Draw wrapped text
+    for (const l of lines) {
+      ctx.fillStyle = COL.ink;
+      ctx.font = `400 ${bodySize}px 'Cormorant Garamond', serif`;
+      ctx.fillText(l, textX, y);
+      y += lineH;
+    }
+
+    if (i < sl.sections.length - 1) y += sectionGap;
+  }
+
+  // Footer rule
+  const footerY = LW - footerH;
+  ctx.strokeStyle = COL.rule;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad, footerY);
+  ctx.lineTo(LW - pad, footerY);
+  ctx.stroke();
+
+  // Footer text
+  ctx.font = font('500', 9.5);
+  ctx.fillStyle = COL.muted;
+  ctx.letterSpacing = '2.5px';
+  ctx.textAlign = 'left';
+  ctx.fillText('PAIGELOVESPILATES.COM', pad, footerY + 18);
+  ctx.textAlign = 'right';
+  ctx.fillText('STUDIO SALARY DATABASE', LW - pad, footerY + 18);
+  ctx.letterSpacing = '0px';
+  ctx.textAlign = 'left';
+
+  return cv;
+}
+
+function render() {
+  const preview = document.getElementById('preview');
+  const ctx = preview.getContext('2d');
+  ctx.clearRect(0, 0, LW, LW);
+  const slide = drawSlide(SLIDES[cur], 1);
+  ctx.drawImage(slide, 0, 0);
+  document.getElementById('counter').textContent = `${cur + 1} / ${SLIDES.length}`;
+}
+
+function go(d) {
+  cur = (cur + d + SLIDES.length) % SLIDES.length;
+  render();
+}
+
+function dl(cv, name) {
+  const a = document.createElement('a');
+  a.download = name;
+  a.href = cv.toDataURL('image/png');
+  a.click();
+}
+
+async function waitFonts() {
+  if (document.fonts && document.fonts.ready) await document.fonts.ready;
+  await new Promise(r => setTimeout(r, 400));
+}
+
+async function exportOne() {
+  const st = document.getElementById('dlStatus');
+  st.textContent = 'Rendering…';
+  await waitFonts();
+  const cv = drawSlide(SLIDES[cur], 2);
+  const name = SLIDES[cur].studio.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  dl(cv, `stories-${name}.png`);
+  st.textContent = '✓ Saved!';
+  setTimeout(() => st.textContent = '', 2000);
+}
+
+async function exportAll() {
+  const btn = document.getElementById('btnAll');
+  const st = document.getElementById('dlStatus');
+  btn.disabled = true;
+  await waitFonts();
+  for (let i = 0; i < SLIDES.length; i++) {
+    st.textContent = `Saving ${i + 1} of ${SLIDES.length}…`;
+    const cv = drawSlide(SLIDES[i], 2);
+    const name = SLIDES[i].studio.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    dl(cv, `stories-${String(i + 1).padStart(2, '0')}-${name}.png`);
+    await new Promise(r => setTimeout(r, 150));
+  }
+  btn.disabled = false;
+  st.textContent = `✓ All ${SLIDES.length} slides saved!`;
+  setTimeout(() => st.textContent = '', 3000);
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await waitFonts();
+  render();
+});
+</script>
+
 </body>
 </html>
