@@ -4,373 +4,799 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stories That Caught My Eye — Carousel Export</title>
+<title>Job Board Launch Carousel — Paige Loves Pilates</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@400;500;600&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;background:#f5f3ef;padding:20px;color:#373930}
-.controls{text-align:center;margin-bottom:16px}
-.controls button{
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
-  padding:10px 20px;margin:4px;border:1px solid #373930;background:#373930;
-  color:#EDEBE4;border-radius:6px;cursor:pointer;
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+–olive: #373930;
+–olive-muted: #5a5d4e;
+–olive-light: #8a8c7a;
+–linen: #EDEBE4;
+–linen-dark: #e0ddd5;
+–white: #ffffff;
+–accent-green: #d4dcc8;
+–slide-size: min(540px, 90vw);
 }
-.controls button:hover{background:#4a4a40}
-.controls button.outline{background:transparent;color:#373930}
-.controls button.outline:hover{background:#e8e5dc}
-.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
-.nav button{width:36px;height:36px;border-radius:50%;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:16px}
-.label{font-size:13px;color:#888}
-#dlStatus{font-size:13px;color:#6a6a5c;margin-top:8px;text-align:center;min-height:20px}
-canvas{display:block;margin:0 auto;border:1px solid #ddd;max-width:100%;height:auto}
+
+body {
+background: #2a2b25;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 40px 20px;
+gap: 24px;
+font-family: ‘DM Sans’, sans-serif;
+}
+
+h1 {
+color: var(–linen);
+font-family: ‘DM Sans’, sans-serif;
+font-weight: 300;
+font-size: 13px;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+opacity: 0.5;
+margin-bottom: 8px;
+}
+
+.slide {
+width: var(–slide-size);
+height: var(–slide-size);
+position: relative;
+flex-shrink: 0;
+overflow: hidden;
+}
+
+/* ── SLIDE 1 — Cover (dark) ── */
+.s1 { background: var(–olive); }
+
+.s1 .badge {
+position: absolute;
+top: 40px;
+left: 40px;
+border: 1px solid rgba(237,235,228,0.35);
+border-radius: 100px;
+padding: 6px 16px;
+font-size: 11px;
+letter-spacing: 0.14em;
+color: var(–linen);
+font-family: ‘DM Sans’, sans-serif;
+font-weight: 400;
+}
+
+.s1 .slide-num {
+position: absolute;
+top: 44px;
+right: 40px;
+font-size: 11px;
+letter-spacing: 0.08em;
+color: rgba(237,235,228,0.45);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s1 .headline {
+position: absolute;
+bottom: 160px;
+left: 40px;
+right: 40px;
+}
+
+.s1 .headline .line1 {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 600;
+font-size: clamp(52px, 11vw, 72px);
+color: var(–linen);
+line-height: 0.95;
+display: block;
+}
+
+.s1 .headline .line2 {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 400;
+font-style: italic;
+font-size: clamp(52px, 11vw, 72px);
+color: var(–olive-light);
+line-height: 0.95;
+display: block;
+}
+
+.s1 .headline .line3 {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 600;
+font-size: clamp(52px, 11vw, 72px);
+color: var(–linen);
+line-height: 0.95;
+display: block;
+}
+
+.s1 .footer {
+position: absolute;
+bottom: 36px;
+left: 40px;
+right: 40px;
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+}
+
+.s1 .tagline {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+font-size: 16px;
+color: var(–olive-light);
+}
+
+.s1 .url {
+font-size: 11px;
+letter-spacing: 0.06em;
+color: rgba(237,235,228,0.4);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+/* ── SLIDE 2 — The Problem (light) ── */
+.s2 { background: var(–linen); }
+
+.s2 .section-label {
+position: absolute;
+top: 40px;
+left: 40px;
+font-size: 11px;
+letter-spacing: 0.14em;
+color: var(–olive-muted);
+font-family: ‘DM Sans’, sans-serif;
+font-weight: 400;
+}
+
+.s2 .slide-num {
+position: absolute;
+top: 40px;
+right: 40px;
+font-size: 11px;
+letter-spacing: 0.08em;
+color: var(–olive-light);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s2 .rule {
+position: absolute;
+top: 110px;
+left: 40px;
+width: 40px;
+height: 1.5px;
+background: var(–olive);
+}
+
+.s2 .headline {
+position: absolute;
+top: 130px;
+left: 40px;
+right: 40px;
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 600;
+font-size: clamp(38px, 8.5vw, 56px);
+color: var(–olive);
+line-height: 1.05;
+}
+
+.s2 .headline em {
+font-style: italic;
+font-weight: 400;
+color: var(–olive-muted);
+}
+
+.s2 .body {
+position: absolute;
+bottom: 120px;
+left: 40px;
+right: 40px;
+font-size: 14px;
+line-height: 1.6;
+color: var(–olive-muted);
+font-weight: 300;
+}
+
+.s2 .footer-label {
+position: absolute;
+bottom: 40px;
+left: 40px;
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+font-size: 14px;
+color: var(–olive-light);
+}
+
+/* ── SLIDE 3 — What’s Inside (dark) ── */
+.s3 { background: var(–olive); }
+
+.s3 .section-label {
+position: absolute;
+top: 40px;
+left: 40px;
+font-size: 11px;
+letter-spacing: 0.14em;
+color: var(–olive-light);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s3 .slide-num {
+position: absolute;
+top: 40px;
+right: 40px;
+font-size: 11px;
+letter-spacing: 0.08em;
+color: rgba(237,235,228,0.35);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s3 .headline {
+position: absolute;
+top: 100px;
+left: 40px;
+right: 40px;
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 600;
+font-size: clamp(34px, 7.5vw, 50px);
+color: var(–linen);
+line-height: 1.05;
+}
+
+.s3 .headline em {
+font-style: italic;
+font-weight: 400;
+color: var(–olive-light);
+}
+
+.s3 .list {
+position: absolute;
+top: 270px;
+left: 40px;
+right: 40px;
+}
+
+.s3 .list-item {
+display: flex;
+align-items: flex-start;
+gap: 20px;
+padding: 16px 0;
+border-top: 1px solid rgba(237,235,228,0.12);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s3 .list-item:last-child {
+border-bottom: 1px solid rgba(237,235,228,0.12);
+}
+
+.s3 .item-num {
+font-size: 11px;
+color: var(–olive-light);
+letter-spacing: 0.06em;
+min-width: 24px;
+padding-top: 2px;
+}
+
+.s3 .item-text strong {
+font-size: 14px;
+font-weight: 500;
+color: var(–linen);
+display: block;
+}
+
+.s3 .item-text span {
+font-size: 13px;
+font-weight: 300;
+color: var(–olive-light);
+}
+
+/* ── SLIDE 4 — What a listing looks like (light) ── */
+.s4 { background: var(–linen); }
+
+.s4 .section-label {
+position: absolute;
+top: 40px;
+left: 40px;
+font-size: 11px;
+letter-spacing: 0.14em;
+color: var(–olive-muted);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s4 .slide-num {
+position: absolute;
+top: 40px;
+right: 40px;
+font-size: 11px;
+letter-spacing: 0.08em;
+color: var(–olive-light);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s4 .headline {
+position: absolute;
+top: 95px;
+left: 40px;
+right: 40px;
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 600;
+font-size: clamp(30px, 6.5vw, 44px);
+color: var(–olive);
+line-height: 1.1;
+}
+
+.s4 .headline em {
+font-style: italic;
+font-weight: 400;
+color: var(–olive-muted);
+}
+
+.s4 .card {
+position: absolute;
+top: 230px;
+left: 40px;
+right: 40px;
+background: white;
+border-radius: 12px;
+padding: 20px 22px;
+box-shadow: 0 2px 16px rgba(55,57,48,0.08);
+}
+
+.s4 .card-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+padding-bottom: 14px;
+border-bottom: 1px solid #eeeeec;
+margin-bottom: 14px;
+}
+
+.s4 .studio-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 600;
+font-size: 20px;
+color: var(–olive);
+}
+
+.s4 .studio-location {
+font-size: 12px;
+color: var(–olive-light);
+margin-top: 2px;
+font-weight: 300;
+}
+
+.s4 .badge-new {
+background: #e8f0e2;
+color: #4a6040;
+font-size: 11px;
+padding: 4px 10px;
+border-radius: 100px;
+font-weight: 500;
+white-space: nowrap;
+}
+
+.s4 .job-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 0;
+border-bottom: 1px solid #f4f3f0;
+}
+
+.s4 .job-row:last-child { border-bottom: none; }
+
+.s4 .job-title {
+font-size: 13px;
+font-weight: 500;
+color: var(–olive);
+}
+
+.s4 .job-detail {
+font-size: 12px;
+color: var(–olive-light);
+font-weight: 300;
+margin-top: 1px;
+}
+
+.s4 .job-pay {
+text-align: right;
+}
+
+.s4 .pay-amount {
+font-size: 15px;
+font-weight: 500;
+color: var(–olive);
+}
+
+.s4 .pay-label {
+font-size: 11px;
+color: var(–olive-light);
+font-weight: 300;
+}
+
+/* ── SLIDE 5 — How it works (light) ── */
+.s5 { background: var(–linen); }
+
+.s5 .section-label {
+position: absolute;
+top: 40px;
+left: 40px;
+font-size: 11px;
+letter-spacing: 0.14em;
+color: var(–olive-muted);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s5 .slide-num {
+position: absolute;
+top: 40px;
+right: 40px;
+font-size: 11px;
+letter-spacing: 0.08em;
+color: var(–olive-light);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s5 .headline {
+position: absolute;
+top: 95px;
+left: 40px;
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 600;
+font-size: clamp(46px, 10vw, 66px);
+color: var(–olive);
+line-height: 1.0;
+}
+
+.s5 .headline .muted {
+display: block;
+font-style: italic;
+font-weight: 400;
+color: var(–olive-muted);
+}
+
+.s5 .steps {
+position: absolute;
+top: 310px;
+left: 40px;
+right: 40px;
+}
+
+.s5 .step {
+display: flex;
+gap: 18px;
+align-items: flex-start;
+margin-bottom: 22px;
+}
+
+.s5 .step-circle {
+width: 28px;
+height: 28px;
+border-radius: 50%;
+border: 1.5px solid var(–olive-light);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 11px;
+color: var(–olive-muted);
+flex-shrink: 0;
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s5 .step-content strong {
+font-size: 14px;
+font-weight: 500;
+color: var(–olive);
+display: block;
+margin-bottom: 2px;
+}
+
+.s5 .step-content span {
+font-size: 13px;
+color: var(–olive-light);
+font-weight: 300;
+}
+
+.s5 .footer {
+position: absolute;
+bottom: 36px;
+left: 40px;
+right: 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.s5 .footer-note {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+font-size: 14px;
+color: var(–olive-light);
+}
+
+.s5 .cta-pill {
+background: var(–olive);
+color: var(–linen);
+font-size: 11px;
+letter-spacing: 0.06em;
+padding: 10px 18px;
+border-radius: 100px;
+font-family: ‘DM Sans’, sans-serif;
+font-weight: 400;
+}
+
+/* ── SLIDE 6 — CTA (dark) ── */
+.s6 { background: var(–olive); }
+
+.s6 .slide-num {
+position: absolute;
+top: 40px;
+right: 40px;
+font-size: 11px;
+letter-spacing: 0.08em;
+color: rgba(237,235,228,0.35);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s6 .link-label {
+position: absolute;
+top: 40px;
+left: 40px;
+font-size: 11px;
+letter-spacing: 0.14em;
+color: var(–olive-light);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s6 .center-block {
+position: absolute;
+top: 50%;
+left: 40px;
+right: 40px;
+transform: translateY(-55%);
+text-align: center;
+}
+
+.s6 .eyebrow {
+font-size: 11px;
+letter-spacing: 0.16em;
+color: var(–olive-light);
+font-family: ‘DM Sans’, sans-serif;
+margin-bottom: 16px;
+}
+
+.s6 .headline {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 600;
+font-size: clamp(46px, 10vw, 68px);
+color: var(–linen);
+line-height: 1.0;
+}
+
+.s6 .headline em {
+font-style: italic;
+font-weight: 400;
+color: var(–olive-light);
+}
+
+.s6 .subline {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+font-size: 18px;
+color: var(–olive-light);
+margin-top: 16px;
+}
+
+.s6 .footer {
+position: absolute;
+bottom: 36px;
+left: 40px;
+right: 40px;
+}
+
+.s6 .link-group {
+margin-bottom: 10px;
+}
+
+.s6 .link-tag {
+font-size: 10px;
+letter-spacing: 0.12em;
+color: var(–olive-light);
+font-family: ‘DM Sans’, sans-serif;
+margin-bottom: 3px;
+}
+
+.s6 .link-url {
+font-size: 13px;
+font-weight: 500;
+color: var(–linen);
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.s6 .link-url.muted {
+color: var(–olive-light);
+font-weight: 300;
+}
 </style>
+
 </head>
 <body>
 
-<div class="nav">
-  <button onclick="go(-1)">‹</button>
-  <span class="label" id="counter">1 / 10</span>
-  <button onclick="go(1)">›</button>
+<h1>Job Board Launch Carousel — paigelovespilates.com</h1>
+
+<!-- SLIDE 1 -->
+
+<div class="slide s1">
+  <span class="badge">NOW LIVE</span>
+  <span class="slide-num">01 / 06</span>
+  <div class="headline">
+    <span class="line1">Pilates</span>
+    <span class="line2">Job</span>
+    <span class="line3">Board</span>
+  </div>
+  <div class="footer">
+    <span class="tagline">Jobs that are actually worth taking.</span>
+    <span class="url">paigelovespilates.com</span>
+  </div>
 </div>
-<canvas id="preview" width="540" height="540"></canvas>
-<div id="dlStatus"></div>
-<div class="controls">
-  <button onclick="exportOne()">Export this slide</button>
-  <button id="btnAll" onclick="exportAll()">Export all slides</button>
+
+<!-- SLIDE 2 -->
+
+<div class="slide s2">
+  <span class="section-label">THE PROBLEM</span>
+  <span class="slide-num">02 / 06</span>
+  <div class="rule"></div>
+  <div class="headline">
+    Finding a job<br>shouldn't mean<br><em>settling</em>.
+  </div>
+  <p class="body">Most Pilates job listings don't tell you what they pay. You apply, you interview, you find out the rate after you're already invested. That's not an accident — it's a system that works against instructors.</p>
+  <span class="footer-label">Pilates Job Board</span>
 </div>
 
-<script>
-const COL = {
-  linen: '#EDEBE4',
-  olive: '#373930',
-  ink: '#2C2B27',
-  muted: '#8a8a7c',
-  accent: '#a09a8c',
-  rule: '#c5c1b8',
-};
+<!-- SLIDE 3 -->
 
-const SLIDES = [
-  {
-    studio: 'Firm Body Pilates',
-    location: 'Scottsdale, AZ, United States',
-    sections: [
-      { label: 'OTHER PERKS', text: 'Free workshops hosted at our studio with the owner who is a master trainer, extra hours for photoshoots and videoshoots available' }
-    ]
-  },
-  {
-    studio: 'Drip cycle',
-    location: 'Whittier, CA, United States',
-    sections: [
-      { label: 'OTHER PERKS', text: '25 dollar bonus when you hit 90 percent capacity' }
-    ]
-  },
-  {
-    studio: 'Contour Pilates',
-    location: 'Atlanta, GA, United States',
-    sections: [
-      { label: 'OTHER PERKS', text: 'Annual bonus, free continuing education workshops offered to instructors' }
-    ]
-  },
-  {
-    studio: 'FLX Move',
-    location: 'Skokie, IL, United States',
-    sections: [
-      { label: 'WORKING HERE', text: '$15 a class when you start as a student teacher, $20 upon completion of 20 classes, $25 a class once you finish the training exam' },
-      { label: 'OTHER PERKS', text: 'Free infrared sauna, free massage chair, discount on clothing and other items in the shop' }
-    ]
-  },
-  {
-    studio: 'Club Pilates Tampa',
-    location: 'Tampa, FL, United States',
-    sections: [
-      { label: 'WORKING HERE', text: 'Love it. Owner is the best.' }
-    ]
-  },
-  {
-    studio: 'The studio Lexington',
-    location: 'Lexington, KY, United States',
-    sections: [
-      { label: 'WORKING HERE', text: 'The reformers are from personal hour — which is a drop ship company from China.' },
-      { label: 'OTHER PERKS', text: 'Hired at one rate, changed once opened. And You get fired through a text' }
-    ]
-  },
-  {
-    studio: 'The Body Center',
-    location: 'Newton, MA, United States',
-    sections: [
-      { label: 'WORKING HERE', text: 'Same rate for teaching classes and privates. Classes hardly run lately due to cancellations (4 hr cancel window) so I don\'t get paid' },
-      { label: 'OTHER PERKS', text: 'W2 not 1099!! So rare. Free use of studio' }
-    ]
-  },
-  {
-    studio: 'Bikram Yoga Salt Lake',
-    location: 'Salt Lake City, UT, United States',
-    sections: [
-      { label: 'WORKING HERE', text: 'You start out at $25 or $30, a class, until you\'ve taught 100. Then you get a $5 raise, every 100. Capped at $60.' },
-      { label: 'OTHER PERKS', text: '30% off all studio merch and beverages' }
-    ]
-  },
-  {
-    studio: 'SLT',
-    location: 'New York city, NY, United States',
-    sections: [
-      { label: 'NEGOTIATION NOTES', text: 'Other instructors have had worse experiences than I had; they play favorites with instructors' },
-      { label: 'WORKING HERE', text: 'The treatment towards instructors has been extremely negative lately, especially since the studio itself was bought up by a hedge fund company' },
-      { label: 'OTHER PERKS', text: 'Partnerships with other studios for free classes elsewhere' }
-    ]
-  },
-  {
-    studio: 'Lit From Within',
-    location: 'Redding, CA, United States',
-    sections: [
-      { label: 'NEGOTIATION NOTES', text: 'I was a brand new instructor looking for experience and I have a well paid day job so I suggested trade only.' },
-      { label: 'OTHER PERKS', text: 'Free spray tan, sauna, classes. I\'m only doing trade' }
-    ]
-  }
-];
+<div class="slide s3">
+  <span class="section-label">WHAT'S INSIDE</span>
+  <span class="slide-num">03 / 06</span>
+  <div class="headline">Everything you need<br>to find a job<br><em>worth having</em></div>
+  <div class="list">
+    <div class="list-item">
+      <span class="item-num">01</span>
+      <div class="item-text">
+        <strong>Pay transparency</strong>
+        <span>Rate listed on every job posting</span>
+      </div>
+    </div>
+    <div class="list-item">
+      <span class="item-num">02</span>
+      <div class="item-text">
+        <strong>Salary Database link</strong>
+        <span>Cross-reference before you apply</span>
+      </div>
+    </div>
+    <div class="list-item">
+      <span class="item-num">03</span>
+      <div class="item-text">
+        <strong>Format & location filters</strong>
+        <span>Reformer, mat, barre — find your fit</span>
+      </div>
+    </div>
+    <div class="list-item">
+      <span class="item-num">04</span>
+      <div class="item-text">
+        <strong>Real studios, real listings</strong>
+        <span>No ghost jobs, no bait-and-switch</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-const LW = 540; // preview logical width
-const EX = 1080; // export size
+<!-- SLIDE 4 -->
 
-let cur = 0;
+<div class="slide s4">
+  <span class="section-label">REAL LISTINGS. PAY INCLUDED.</span>
+  <span class="slide-num">04 / 06</span>
+  <div class="headline">This is what a<br><em>job listing</em> looks like</div>
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="studio-name">Bloom Studio</div>
+        <div class="studio-location">📍 Brooklyn, NY</div>
+      </div>
+      <span class="badge-new">↑ Now hiring</span>
+    </div>
+    <div class="job-row">
+      <div>
+        <div class="job-title">Reformer — Experienced</div>
+        <div class="job-detail">3+ years required</div>
+      </div>
+      <div class="job-pay">
+        <div class="pay-label">Per class</div>
+        <div class="pay-amount">$58</div>
+      </div>
+    </div>
+    <div class="job-row">
+      <div>
+        <div class="job-title">Reformer — New Instructor</div>
+        <div class="job-detail">Open to recent grads</div>
+      </div>
+      <div class="job-pay">
+        <div class="pay-label">Per class</div>
+        <div class="pay-amount">$42</div>
+      </div>
+    </div>
+    <div class="job-row">
+      <div>
+        <div class="job-title">Heated Mat</div>
+        <div class="job-detail">Weekend availability preferred</div>
+      </div>
+      <div class="job-pay">
+        <div class="pay-label">Per class</div>
+        <div class="pay-amount">$45</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-function font(weight, size, family) {
-  family = family || 'DM Sans';
-  return `${weight} ${size}px '${family}', sans-serif`;
-}
+<!-- SLIDE 5 -->
 
-function fontItalic(weight, size, family) {
-  family = family || 'Cormorant Garamond';
-  return `italic ${weight} ${size}px '${family}', serif`;
-}
+<div class="slide s5">
+  <span class="section-label">HOW IT WORKS</span>
+  <span class="slide-num">05 / 06</span>
+  <div class="headline">
+    Free.<br>
+    <span class="muted">Open to all.</span>
+    No paywall.
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle">1</div>
+      <div class="step-content">
+        <strong>Browse open positions</strong>
+        <span>Filter by city, format, or experience level</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-content">
+        <strong>See the pay before you apply</strong>
+        <span>Every listing includes the rate</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-content">
+        <strong>Walk in knowing your number</strong>
+        <span>Cross-reference with the Salary Database</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="footer-note">Studios can post jobs too →</span>
+    <span class="cta-pill">paigelovespilates.com/jobs</span>
+  </div>
+</div>
 
-function wrapText(ctx, text, x, maxW, lineH) {
-  const words = text.split(' ');
-  let line = '';
-  const lines = [];
-  for (const w of words) {
-    const test = line ? line + ' ' + w : w;
-    if (ctx.measureText(test).width > maxW && line) {
-      lines.push(line);
-      line = w;
-    } else {
-      line = test;
-    }
-  }
-  if (line) lines.push(line);
-  return lines;
-}
+<!-- SLIDE 6 -->
 
-function fitFontSize(ctx, text, maxW, maxSize, minSize, weight, family) {
-  for (let s = maxSize; s >= minSize; s--) {
-    ctx.font = fontItalic(weight || '700', s, family || 'Cormorant Garamond');
-    if (ctx.measureText(text).width <= maxW) return s;
-  }
-  return minSize;
-}
-
-function measureSections(ctx, sl, textW, bodySize, labelSize, lineH, barPad, sectionGap) {
-  let total = 0;
-  for (let i = 0; i < sl.sections.length; i++) {
-    const sec = sl.sections[i];
-    ctx.font = font('600', labelSize);
-    total += labelSize + barPad; // label + gap to body
-    ctx.font = `400 ${bodySize}px 'Cormorant Garamond', serif`;
-    const lines = wrapText(ctx, sec.text, 0, textW - 4, lineH);
-    total += lines.length * lineH;
-    if (i < sl.sections.length - 1) total += sectionGap;
-  }
-  return total;
-}
-
-function drawSlide(sl, scale) {
-  scale = scale || 1;
-  const S = LW * scale;
-  const cv = document.createElement('canvas');
-  cv.width = S; cv.height = S;
-  const ctx = cv.getContext('2d');
-  ctx.scale(scale, scale);
-
-  // Background
-  ctx.fillStyle = COL.linen;
-  ctx.fillRect(0, 0, LW, LW);
-
-  const pad = 48;
-  const contentW = LW - pad * 2;
-  let y = 48;
-
-  // "STORIES THAT CAUGHT MY EYE" header
-  ctx.font = font('600', 10.5);
-  ctx.fillStyle = COL.muted;
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'top';
-  ctx.letterSpacing = '3px';
-  ctx.fillText('STORIES THAT CAUGHT MY EYE', pad, y);
-  ctx.letterSpacing = '0px';
-  y += 26;
-
-  // Studio name — large italic Cormorant Garamond (same family as body)
-  const nameSize = fitFontSize(ctx, sl.studio, contentW, 48, 28, '700', 'Cormorant Garamond');
-  ctx.font = `italic 700 ${nameSize}px 'Cormorant Garamond', serif`;
-  ctx.fillStyle = COL.ink;
-  ctx.fillText(sl.studio, pad, y);
-  y += nameSize + 14;
-
-  // Location
-  ctx.font = font('400', 15);
-  ctx.fillStyle = COL.muted;
-  ctx.fillText(sl.location, pad, y);
-  y += 60; // generous gap before sections
-
-  // Sections — use Cormorant Garamond for body text (editorial serif feel)
-  const sectionCount = sl.sections.length;
-  const footerH = 48;
-  const availH = LW - y - footerH - 10;
-
-  // Adaptive sizing — try large first, shrink to fit
-  let bodySize, labelSize, sectionGap, barPad, lineH;
-  const textX = pad + 16;
-  const textW = contentW - 16;
-  const barX = pad;
-
-  // Try sizes from large to small
-  const sizes = [
-    { body: 26, label: 10, gap: 32, bpad: 16 },
-    { body: 23, label: 10, gap: 28, bpad: 14 },
-    { body: 20, label: 9.5, gap: 24, bpad: 13 },
-    { body: 18, label: 9, gap: 20, bpad: 12 },
-    { body: 16, label: 8.5, gap: 16, bpad: 10 },
-    { body: 14, label: 8, gap: 14, bpad: 9 },
-  ];
-
-  let chosen = sizes[sizes.length - 1];
-  for (const s of sizes) {
-    const lh = s.body * 1.5;
-    const h = measureSections(ctx, sl, textW, s.body, s.label, lh, s.bpad, s.gap);
-    if (h <= availH) { chosen = s; break; }
-  }
-
-  bodySize = chosen.body;
-  labelSize = chosen.label;
-  sectionGap = chosen.gap;
-  barPad = chosen.bpad;
-  lineH = bodySize * 1.5;
-
-  for (let i = 0; i < sl.sections.length; i++) {
-    const sec = sl.sections[i];
-
-    // Label — spaced caps DM Sans
-    ctx.font = font('600', labelSize);
-    ctx.fillStyle = COL.muted;
-    ctx.letterSpacing = '2.5px';
-    ctx.fillText(sec.label, textX, y);
-    ctx.letterSpacing = '0px';
-    y += labelSize + barPad;
-
-    // Body text — Cormorant Garamond (editorial serif)
-    ctx.font = `400 ${bodySize}px 'Cormorant Garamond', serif`;
-    ctx.fillStyle = COL.ink;
-    const lines = wrapText(ctx, sec.text, textX, textW - 4, lineH);
-
-    // Accent bar — spans label through body
-    const barTop = y - barPad - labelSize - 6;
-    const barBottom = y + lines.length * lineH + 4;
-    ctx.fillStyle = COL.accent;
-    ctx.fillRect(barX, barTop, 3, barBottom - barTop);
-
-    // Draw wrapped text
-    for (const l of lines) {
-      ctx.fillStyle = COL.ink;
-      ctx.font = `400 ${bodySize}px 'Cormorant Garamond', serif`;
-      ctx.fillText(l, textX, y);
-      y += lineH;
-    }
-
-    if (i < sl.sections.length - 1) y += sectionGap;
-  }
-
-  // Footer rule
-  const footerY = LW - footerH;
-  ctx.strokeStyle = COL.rule;
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(pad, footerY);
-  ctx.lineTo(LW - pad, footerY);
-  ctx.stroke();
-
-  // Footer text
-  ctx.font = font('500', 9.5);
-  ctx.fillStyle = COL.muted;
-  ctx.letterSpacing = '2.5px';
-  ctx.textAlign = 'left';
-  ctx.fillText('PAIGELOVESPILATES.COM', pad, footerY + 18);
-  ctx.textAlign = 'right';
-  ctx.fillText('STUDIO SALARY DATABASE', LW - pad, footerY + 18);
-  ctx.letterSpacing = '0px';
-  ctx.textAlign = 'left';
-
-  return cv;
-}
-
-function render() {
-  const preview = document.getElementById('preview');
-  const ctx = preview.getContext('2d');
-  ctx.clearRect(0, 0, LW, LW);
-  const slide = drawSlide(SLIDES[cur], 1);
-  ctx.drawImage(slide, 0, 0);
-  document.getElementById('counter').textContent = `${cur + 1} / ${SLIDES.length}`;
-}
-
-function go(d) {
-  cur = (cur + d + SLIDES.length) % SLIDES.length;
-  render();
-}
-
-function dl(cv, name) {
-  const a = document.createElement('a');
-  a.download = name;
-  a.href = cv.toDataURL('image/png');
-  a.click();
-}
-
-async function waitFonts() {
-  if (document.fonts && document.fonts.ready) await document.fonts.ready;
-  await new Promise(r => setTimeout(r, 400));
-}
-
-async function exportOne() {
-  const st = document.getElementById('dlStatus');
-  st.textContent = 'Rendering…';
-  await waitFonts();
-  const cv = drawSlide(SLIDES[cur], 2);
-  const name = SLIDES[cur].studio.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  dl(cv, `stories-${name}.png`);
-  st.textContent = '✓ Saved!';
-  setTimeout(() => st.textContent = '', 2000);
-}
-
-async function exportAll() {
-  const btn = document.getElementById('btnAll');
-  const st = document.getElementById('dlStatus');
-  btn.disabled = true;
-  await waitFonts();
-  for (let i = 0; i < SLIDES.length; i++) {
-    st.textContent = `Saving ${i + 1} of ${SLIDES.length}…`;
-    const cv = drawSlide(SLIDES[i], 2);
-    const name = SLIDES[i].studio.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    dl(cv, `stories-${String(i + 1).padStart(2, '0')}-${name}.png`);
-    await new Promise(r => setTimeout(r, 150));
-  }
-  btn.disabled = false;
-  st.textContent = `✓ All ${SLIDES.length} slides saved!`;
-  setTimeout(() => st.textContent = '', 3000);
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-  await waitFonts();
-  render();
-});
-</script>
+<div class="slide s6">
+  <span class="link-label">LINK IN BIO</span>
+  <span class="slide-num">06 / 06</span>
+  <div class="center-block">
+    <div class="eyebrow">KNOW YOUR WORTH</div>
+    <div class="headline">You deserve<br>a job that <em>pays</em>.</div>
+    <div class="subline">Now you can find one.</div>
+  </div>
+  <div class="footer">
+    <div class="link-group">
+      <div class="link-tag">BROWSE JOBS</div>
+      <div class="link-url">paigelovespilates.com/jobs</div>
+    </div>
+    <div class="link-group">
+      <div class="link-tag">POST A JOB</div>
+      <div class="link-url muted">paigelovespilates.com/post</div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
