@@ -1,800 +1,598 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Job Board Launch Carousel — Paige Loves Pilates</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Job Board Launch Carousel v13 — Paige Loves Pilates</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-:root {
-–olive: #373930;
-–olive-muted: #5a5d4e;
-–olive-light: #8a8c7a;
-–linen: #EDEBE4;
-–linen-dark: #e0ddd5;
-–white: #ffffff;
-–accent-green: #d4dcc8;
-–slide-size: min(540px, 90vw);
-}
-
-body {
-background: #2a2b25;
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 40px 20px;
-gap: 24px;
-font-family: ‘DM Sans’, sans-serif;
-}
-
-h1 {
-color: var(–linen);
-font-family: ‘DM Sans’, sans-serif;
-font-weight: 300;
-font-size: 13px;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-opacity: 0.5;
-margin-bottom: 8px;
-}
-
-.slide {
-width: var(–slide-size);
-height: var(–slide-size);
-position: relative;
-flex-shrink: 0;
-overflow: hidden;
-}
-
-/* ── SLIDE 1 — Cover (dark) ── */
-.s1 { background: var(–olive); }
-
-.s1 .badge {
-position: absolute;
-top: 40px;
-left: 40px;
-border: 1px solid rgba(237,235,228,0.35);
-border-radius: 100px;
-padding: 6px 16px;
-font-size: 11px;
-letter-spacing: 0.14em;
-color: var(–linen);
-font-family: ‘DM Sans’, sans-serif;
-font-weight: 400;
-}
-
-.s1 .slide-num {
-position: absolute;
-top: 44px;
-right: 40px;
-font-size: 11px;
-letter-spacing: 0.08em;
-color: rgba(237,235,228,0.45);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s1 .headline {
-position: absolute;
-bottom: 160px;
-left: 40px;
-right: 40px;
-}
-
-.s1 .headline .line1 {
-font-family: ‘Cormorant Garamond’, serif;
-font-weight: 600;
-font-size: clamp(52px, 11vw, 72px);
-color: var(–linen);
-line-height: 0.95;
-display: block;
-}
-
-.s1 .headline .line2 {
-font-family: ‘Cormorant Garamond’, serif;
-font-weight: 400;
-font-style: italic;
-font-size: clamp(52px, 11vw, 72px);
-color: var(–olive-light);
-line-height: 0.95;
-display: block;
-}
-
-.s1 .headline .line3 {
-font-family: ‘Cormorant Garamond’, serif;
-font-weight: 600;
-font-size: clamp(52px, 11vw, 72px);
-color: var(–linen);
-line-height: 0.95;
-display: block;
-}
-
-.s1 .footer {
-position: absolute;
-bottom: 36px;
-left: 40px;
-right: 40px;
-display: flex;
-justify-content: space-between;
-align-items: flex-end;
-}
-
-.s1 .tagline {
-font-family: ‘Cormorant Garamond’, serif;
-font-style: italic;
-font-size: 16px;
-color: var(–olive-light);
-}
-
-.s1 .url {
-font-size: 11px;
-letter-spacing: 0.06em;
-color: rgba(237,235,228,0.4);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-/* ── SLIDE 2 — The Problem (light) ── */
-.s2 { background: var(–linen); }
-
-.s2 .section-label {
-position: absolute;
-top: 40px;
-left: 40px;
-font-size: 11px;
-letter-spacing: 0.14em;
-color: var(–olive-muted);
-font-family: ‘DM Sans’, sans-serif;
-font-weight: 400;
-}
-
-.s2 .slide-num {
-position: absolute;
-top: 40px;
-right: 40px;
-font-size: 11px;
-letter-spacing: 0.08em;
-color: var(–olive-light);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s2 .rule {
-position: absolute;
-top: 110px;
-left: 40px;
-width: 40px;
-height: 1.5px;
-background: var(–olive);
-}
-
-.s2 .headline {
-position: absolute;
-top: 130px;
-left: 40px;
-right: 40px;
-font-family: ‘Cormorant Garamond’, serif;
-font-weight: 600;
-font-size: clamp(38px, 8.5vw, 56px);
-color: var(–olive);
-line-height: 1.05;
-}
-
-.s2 .headline em {
-font-style: italic;
-font-weight: 400;
-color: var(–olive-muted);
-}
-
-.s2 .body {
-position: absolute;
-bottom: 120px;
-left: 40px;
-right: 40px;
-font-size: 14px;
-line-height: 1.6;
-color: var(–olive-muted);
-font-weight: 300;
-}
-
-.s2 .footer-label {
-position: absolute;
-bottom: 40px;
-left: 40px;
-font-family: ‘Cormorant Garamond’, serif;
-font-style: italic;
-font-size: 14px;
-color: var(–olive-light);
-}
-
-/* ── SLIDE 3 — What’s Inside (dark) ── */
-.s3 { background: var(–olive); }
-
-.s3 .section-label {
-position: absolute;
-top: 40px;
-left: 40px;
-font-size: 11px;
-letter-spacing: 0.14em;
-color: var(–olive-light);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s3 .slide-num {
-position: absolute;
-top: 40px;
-right: 40px;
-font-size: 11px;
-letter-spacing: 0.08em;
-color: rgba(237,235,228,0.35);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s3 .headline {
-position: absolute;
-top: 100px;
-left: 40px;
-right: 40px;
-font-family: ‘Cormorant Garamond’, serif;
-font-weight: 600;
-font-size: clamp(34px, 7.5vw, 50px);
-color: var(–linen);
-line-height: 1.05;
-}
-
-.s3 .headline em {
-font-style: italic;
-font-weight: 400;
-color: var(–olive-light);
-}
-
-.s3 .list {
-position: absolute;
-top: 270px;
-left: 40px;
-right: 40px;
-}
-
-.s3 .list-item {
-display: flex;
-align-items: flex-start;
-gap: 20px;
-padding: 16px 0;
-border-top: 1px solid rgba(237,235,228,0.12);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s3 .list-item:last-child {
-border-bottom: 1px solid rgba(237,235,228,0.12);
-}
-
-.s3 .item-num {
-font-size: 11px;
-color: var(–olive-light);
-letter-spacing: 0.06em;
-min-width: 24px;
-padding-top: 2px;
-}
-
-.s3 .item-text strong {
-font-size: 14px;
-font-weight: 500;
-color: var(–linen);
-display: block;
-}
-
-.s3 .item-text span {
-font-size: 13px;
-font-weight: 300;
-color: var(–olive-light);
-}
-
-/* ── SLIDE 4 — What a listing looks like (light) ── */
-.s4 { background: var(–linen); }
-
-.s4 .section-label {
-position: absolute;
-top: 40px;
-left: 40px;
-font-size: 11px;
-letter-spacing: 0.14em;
-color: var(–olive-muted);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s4 .slide-num {
-position: absolute;
-top: 40px;
-right: 40px;
-font-size: 11px;
-letter-spacing: 0.08em;
-color: var(–olive-light);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s4 .headline {
-position: absolute;
-top: 95px;
-left: 40px;
-right: 40px;
-font-family: ‘Cormorant Garamond’, serif;
-font-weight: 600;
-font-size: clamp(30px, 6.5vw, 44px);
-color: var(–olive);
-line-height: 1.1;
-}
-
-.s4 .headline em {
-font-style: italic;
-font-weight: 400;
-color: var(–olive-muted);
-}
-
-.s4 .card {
-position: absolute;
-top: 230px;
-left: 40px;
-right: 40px;
-background: white;
-border-radius: 12px;
-padding: 20px 22px;
-box-shadow: 0 2px 16px rgba(55,57,48,0.08);
-}
-
-.s4 .card-header {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-padding-bottom: 14px;
-border-bottom: 1px solid #eeeeec;
-margin-bottom: 14px;
-}
-
-.s4 .studio-name {
-font-family: ‘Cormorant Garamond’, serif;
-font-weight: 600;
-font-size: 20px;
-color: var(–olive);
-}
-
-.s4 .studio-location {
-font-size: 12px;
-color: var(–olive-light);
-margin-top: 2px;
-font-weight: 300;
-}
-
-.s4 .badge-new {
-background: #e8f0e2;
-color: #4a6040;
-font-size: 11px;
-padding: 4px 10px;
-border-radius: 100px;
-font-weight: 500;
-white-space: nowrap;
-}
-
-.s4 .job-row {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 10px 0;
-border-bottom: 1px solid #f4f3f0;
-}
-
-.s4 .job-row:last-child { border-bottom: none; }
-
-.s4 .job-title {
-font-size: 13px;
-font-weight: 500;
-color: var(–olive);
-}
-
-.s4 .job-detail {
-font-size: 12px;
-color: var(–olive-light);
-font-weight: 300;
-margin-top: 1px;
-}
-
-.s4 .job-pay {
-text-align: right;
-}
-
-.s4 .pay-amount {
-font-size: 15px;
-font-weight: 500;
-color: var(–olive);
-}
-
-.s4 .pay-label {
-font-size: 11px;
-color: var(–olive-light);
-font-weight: 300;
-}
-
-/* ── SLIDE 5 — How it works (light) ── */
-.s5 { background: var(–linen); }
-
-.s5 .section-label {
-position: absolute;
-top: 40px;
-left: 40px;
-font-size: 11px;
-letter-spacing: 0.14em;
-color: var(–olive-muted);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s5 .slide-num {
-position: absolute;
-top: 40px;
-right: 40px;
-font-size: 11px;
-letter-spacing: 0.08em;
-color: var(–olive-light);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s5 .headline {
-position: absolute;
-top: 95px;
-left: 40px;
-font-family: ‘Cormorant Garamond’, serif;
-font-weight: 600;
-font-size: clamp(46px, 10vw, 66px);
-color: var(–olive);
-line-height: 1.0;
-}
-
-.s5 .headline .muted {
-display: block;
-font-style: italic;
-font-weight: 400;
-color: var(–olive-muted);
-}
-
-.s5 .steps {
-position: absolute;
-top: 310px;
-left: 40px;
-right: 40px;
-}
-
-.s5 .step {
-display: flex;
-gap: 18px;
-align-items: flex-start;
-margin-bottom: 22px;
-}
-
-.s5 .step-circle {
-width: 28px;
-height: 28px;
-border-radius: 50%;
-border: 1.5px solid var(–olive-light);
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 11px;
-color: var(–olive-muted);
-flex-shrink: 0;
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s5 .step-content strong {
-font-size: 14px;
-font-weight: 500;
-color: var(–olive);
-display: block;
-margin-bottom: 2px;
-}
-
-.s5 .step-content span {
-font-size: 13px;
-color: var(–olive-light);
-font-weight: 300;
-}
-
-.s5 .footer {
-position: absolute;
-bottom: 36px;
-left: 40px;
-right: 40px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.s5 .footer-note {
-font-family: ‘Cormorant Garamond’, serif;
-font-style: italic;
-font-size: 14px;
-color: var(–olive-light);
-}
-
-.s5 .cta-pill {
-background: var(–olive);
-color: var(–linen);
-font-size: 11px;
-letter-spacing: 0.06em;
-padding: 10px 18px;
-border-radius: 100px;
-font-family: ‘DM Sans’, sans-serif;
-font-weight: 400;
-}
-
-/* ── SLIDE 6 — CTA (dark) ── */
-.s6 { background: var(–olive); }
-
-.s6 .slide-num {
-position: absolute;
-top: 40px;
-right: 40px;
-font-size: 11px;
-letter-spacing: 0.08em;
-color: rgba(237,235,228,0.35);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s6 .link-label {
-position: absolute;
-top: 40px;
-left: 40px;
-font-size: 11px;
-letter-spacing: 0.14em;
-color: var(–olive-light);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s6 .center-block {
-position: absolute;
-top: 50%;
-left: 40px;
-right: 40px;
-transform: translateY(-55%);
-text-align: center;
-}
-
-.s6 .eyebrow {
-font-size: 11px;
-letter-spacing: 0.16em;
-color: var(–olive-light);
-font-family: ‘DM Sans’, sans-serif;
-margin-bottom: 16px;
-}
-
-.s6 .headline {
-font-family: ‘Cormorant Garamond’, serif;
-font-weight: 600;
-font-size: clamp(46px, 10vw, 68px);
-color: var(–linen);
-line-height: 1.0;
-}
-
-.s6 .headline em {
-font-style: italic;
-font-weight: 400;
-color: var(–olive-light);
-}
-
-.s6 .subline {
-font-family: ‘Cormorant Garamond’, serif;
-font-style: italic;
-font-size: 18px;
-color: var(–olive-light);
-margin-top: 16px;
-}
-
-.s6 .footer {
-position: absolute;
-bottom: 36px;
-left: 40px;
-right: 40px;
-}
-
-.s6 .link-group {
-margin-bottom: 10px;
-}
-
-.s6 .link-tag {
-font-size: 10px;
-letter-spacing: 0.12em;
-color: var(–olive-light);
-font-family: ‘DM Sans’, sans-serif;
-margin-bottom: 3px;
-}
-
-.s6 .link-url {
-font-size: 13px;
-font-weight: 500;
-color: var(–linen);
-font-family: ‘DM Sans’, sans-serif;
-}
-
-.s6 .link-url.muted {
-color: var(–olive-light);
-font-weight: 300;
-}
+  :root {
+    --olive:       #373930;
+    --olive-muted: #5a5d4e;
+    --olive-light: #8a8c7a;
+    --linen:       #EDEBE4;
+    --linen-mid:   #E0DDD4;
+    --rule:        #CCCAB8;
+    --mid:         #6E6C64;
+    --dark:        #2C2C28;
+    --white:       #F5F4F0;
+    --slide-size:  min(540px, 90vw);
+  }
+
+  body {
+    background: #1e1f1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 4px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .deck-label {
+    color: rgba(237,235,228,0.3);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    align-self: flex-start;
+    margin-left: calc((100vw - min(540px, 90vw)) / 2);
+  }
+
+  .slide {
+    width: var(--slide-size);
+    height: var(--slide-size);
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .s-label {
+    position: absolute;
+    top: 40px; left: 40px;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif; font-weight: 400;
+  }
+  .s-num {
+    position: absolute;
+    top: 40px; right: 40px;
+    font-size: 11px; letter-spacing: 0.08em;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ══════════════════════════════════════════
+     SLIDE 1 — THE PROBLEM  (linen)
+  ══════════════════════════════════════════ */
+  .s1 { background: var(--linen); }
+  .s1 .s-label { color: var(--olive-muted); }
+  .s1 .s-num   { color: var(--olive-light); }
+
+  .s1 .headline {
+    position: absolute;
+    top: 50%; left: 40px; right: 40px;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(42px, 9.5vw, 60px);
+    color: var(--olive); line-height: 1.05;
+  }
+  .s1 .headline em { font-style: italic; font-weight: 400; color: var(--olive-muted); }
+
+  .s1 .footer {
+    position: absolute;
+    bottom: 40px; left: 40px;
+  }
+  .s1 .footer-tag {
+    font-size: 11px; font-weight: 300; letter-spacing: 0.04em;
+    color: var(--olive-muted); margin-bottom: 4px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .s1 .footer-url {
+    font-size: 12px; font-weight: 400;
+    color: var(--olive-light);
+    font-family: 'DM Sans', sans-serif; letter-spacing: 0.02em;
+  }
+
+  /* ══════════════════════════════════════════
+     SLIDE 2 — PLATFORM JOURNEY  (olive)
+  ══════════════════════════════════════════ */
+  .s2 { background: var(--olive); }
+  .s2 .s-label { color: var(--olive-light); }
+  .s2 .s-num   { color: rgba(237,235,228,0.35); }
+
+  .s2 .headline {
+    position: absolute;
+    top: 80px; left: 40px; right: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(36px, 7.5vw, 46px);
+    color: var(--linen); line-height: 1.05;
+  }
+  .s2 .headline em { font-style: italic; font-weight: 400; color: var(--olive-light); }
+
+  .s2 .sub {
+    position: absolute;
+    top: 248px; left: 40px; right: 40px;
+    font-size: 12px; font-weight: 300; line-height: 1.6;
+    color: rgba(237,235,228,0.55);
+  }
+
+  .s2 .journey {
+    position: absolute;
+    top: 310px; left: 40px; right: 40px;
+    height: 148px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid rgba(237,235,228,0.18);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .s2 .j-item {
+    display: flex; flex-direction: column;
+    padding: 12px 12px 30px;
+    border-right: 1px solid rgba(237,235,228,0.18);
+    position: relative;
+  }
+  .s2 .j-item:last-child { border-right: none; }
+
+  .s2 .j-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--linen);
+    opacity: 0;
+  }
+
+  .s2 .j-item.is-new { background: rgba(237,235,228,0.06); }
+  .s2 .j-item.is-new::before { opacity: 1; }
+
+  .s2 .j-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px; font-weight: 400; letter-spacing: 0.12em;
+    color: var(--olive-light); margin-bottom: 7px;
+  }
+  .s2 .j-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 400;
+    color: var(--linen); line-height: 1.15; margin-bottom: 4px;
+  }
+  .s2 .j-tag {
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--olive-light); line-height: 1.5;
+  }
+  .s2 .j-item.is-new .j-num,
+  .s2 .j-item.is-new .j-tag { color: rgba(237,235,228,0.5); }
+  .s2 .j-item.is-new .j-name { color: var(--linen); }
+
+  .s2 .j-arrow {
+    position: absolute;
+    bottom: 12px; right: 12px;
+    font-size: 11px; color: rgba(237,235,228,0.22);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .s2 .j-item.is-new .j-arrow { color: rgba(237,235,228,0.45); }
+
+  /* ══════════════════════════════════════════
+     SLIDE 3 — THE LISTING CARD  (linen)
+  ══════════════════════════════════════════ */
+  .s3 { background: var(--linen); }
+  .s3 .s-label { color: var(--olive-muted); }
+  .s3 .s-num   { color: var(--olive-light); }
+
+  .s3 .headline {
+    position: absolute;
+    top: 88px; left: 40px; right: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(24px, 5vw, 34px);
+    color: var(--olive); line-height: 1.1;
+  }
+  .s3 .headline em { font-style: italic; font-weight: 400; color: var(--olive-muted); }
+
+  .s3 .card {
+    position: absolute;
+    top: 178px; left: 40px; right: 40px; bottom: 36px;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 13px 15px;
+    box-shadow: 0 2px 14px rgba(55,57,48,0.07);
+    display: flex; flex-direction: column;
+  }
+  .s3 .card-studio {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 400; color: var(--dark);
+    margin-bottom: 1px;
+  }
+  .s3 .card-db-link {
+    font-size: 10px; color: var(--olive-light);
+    margin-bottom: 5px; display: block;
+  }
+  .s3 .card-location {
+    font-size: 11px; color: var(--mid);
+    font-weight: 300; margin-bottom: 8px;
+  }
+  .s3 .card-badges {
+    display: flex; gap: 6px; margin-bottom: 9px;
+  }
+  .s3 .badge-type {
+    font-size: 10px; letter-spacing: 0.07em;
+    padding: 3px 9px; border-radius: 2px;
+    background: var(--olive); color: var(--linen);
+  }
+  .s3 .badge-format {
+    font-size: 10px; letter-spacing: 0.07em;
+    padding: 3px 9px; border-radius: 2px;
+    background: var(--linen); color: var(--mid);
+    border: 1px solid var(--rule);
+  }
+  .s3 .card-details {
+    border-top: 1px solid #e8e6de;
+    border-bottom: 1px solid #e8e6de;
+    padding: 7px 0; margin-bottom: 8px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .s3 .detail-row {
+    display: flex; justify-content: space-between;
+    font-size: 11px; font-weight: 300; color: var(--mid);
+  }
+  .s3 .detail-label {
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--olive-light);
+  }
+  .s3 .card-pay {
+    background: var(--linen);
+    padding: 7px 12px; text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; color: var(--olive);
+    border-radius: 2px; margin-bottom: 7px;
+  }
+  .s3 .card-notes {
+    font-size: 11px; color: var(--mid); line-height: 1.5;
+    margin-bottom: 9px; padding-top: 7px;
+    border-top: 1px solid #e8e6de; flex-shrink: 0;
+  }
+  .s3 .card-notes-label {
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--olive-light); margin-bottom: 3px;
+  }
+  .s3 .card-cta {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    margin-top: auto;
+  }
+  .s3 .btn {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 8px 10px; border-radius: 2px;
+    text-align: center; font-family: 'DM Sans', sans-serif;
+  }
+  .s3 .btn-primary  { background: var(--olive); color: var(--linen); border: none; }
+  .s3 .btn-secondary { background: transparent; color: var(--mid); border: 1px solid var(--rule); }
+
+  /* ══════════════════════════════════════════
+     SLIDE 4 — WHAT'S INSIDE  (olive)
+  ══════════════════════════════════════════ */
+  .s4 { background: var(--olive); }
+  .s4 .s-label { color: var(--olive-light); }
+  .s4 .s-num   { color: rgba(237,235,228,0.35); }
+
+  .s4 .headline {
+    position: absolute;
+    top: 96px; left: 40px; right: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(30px, 6.5vw, 42px);
+    color: var(--linen); line-height: 1.05;
+  }
+  .s4 .headline em { font-style: italic; font-weight: 400; color: var(--olive-light); }
+
+  .s4 .list {
+    position: absolute;
+    top: 238px; left: 40px; right: 40px; bottom: 60px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .s4 .list-item {
+    display: flex; align-items: flex-start; gap: 18px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(237,235,228,0.12);
+    flex: 1;
+  }
+  .s4 .list-item:last-child { border-bottom: 1px solid rgba(237,235,228,0.12); }
+  .s4 .item-num {
+    font-size: 11px; color: var(--olive-light);
+    letter-spacing: 0.06em; min-width: 22px; padding-top: 1px;
+    font-family: 'DM Sans', sans-serif; flex-shrink: 0;
+  }
+  .s4 .item-text strong {
+    font-size: 13px; font-weight: 500;
+    color: var(--linen); display: block; margin-bottom: 2px;
+  }
+  .s4 .item-text span {
+    font-size: 11.5px; font-weight: 300; color: var(--olive-light);
+    line-height: 1.45;
+  }
+
+  /* ══════════════════════════════════════════
+     SLIDE 5 — FREE FOR EVERYONE  (linen)
+  ══════════════════════════════════════════ */
+  .s5 { background: var(--linen); }
+  .s5 .s-label { color: var(--olive-muted); }
+  .s5 .s-num   { color: var(--olive-light); }
+
+  .s5 .headline {
+    position: absolute;
+    top: 110px; left: 40px; right: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(32px, 7vw, 44px);
+    color: var(--olive); line-height: 1.0;
+  }
+  .s5 .headline em { font-style: italic; font-weight: 400; color: var(--olive-muted); }
+
+  .s5 .cards {
+    position: absolute;
+    top: 272px; left: 40px; right: 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .s5 .who-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 14px;
+  }
+  .s5 .who-card.studio {
+    background: var(--olive);
+    border-color: var(--olive);
+  }
+  .s5 .who-eyebrow {
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--olive-light); margin-bottom: 8px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .s5 .who-card.studio .who-eyebrow { color: rgba(237,235,228,0.45); }
+  .s5 .who-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-weight: 600;
+    color: var(--olive); margin-bottom: 8px; line-height: 1.1;
+  }
+  .s5 .who-card.studio .who-heading { color: var(--linen); }
+  .s5 .who-rule {
+    width: 20px; height: 1px;
+    background: var(--rule); margin-bottom: 8px;
+  }
+  .s5 .who-card.studio .who-rule { background: rgba(237,235,228,0.2); }
+  .s5 .who-body {
+    font-size: 12px; font-weight: 300;
+    color: var(--mid); line-height: 1.55;
+  }
+  .s5 .who-card.studio .who-body { color: rgba(237,235,228,0.55); }
+
+  .s5 .footer {
+    position: absolute;
+    bottom: 36px; left: 40px; right: 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .s5 .footer-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 13px; color: var(--olive-light);
+  }
+  .s5 .cta-pill {
+    background: var(--olive); color: var(--linen);
+    font-size: 11px; letter-spacing: 0.06em;
+    padding: 10px 18px; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif; font-weight: 400;
+  }
+
+  /* ══════════════════════════════════════════
+     SLIDE 6 — CLOSING CTA  (olive)
+  ══════════════════════════════════════════ */
+  .s6 { background: var(--olive); }
+  .s6 .s-num   { color: rgba(237,235,228,0.35); }
+  .s6 .s-label { color: var(--olive-light); }
+
+  .s6 .center-block {
+    position: absolute;
+    top: 50%; left: 40px; right: 40px;
+    transform: translateY(-55%);
+    text-align: center;
+  }
+  .s6 .eyebrow {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--olive-light); font-family: 'DM Sans', sans-serif;
+    margin-bottom: 16px;
+  }
+  .s6 .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(36px, 8vw, 52px);
+    color: var(--linen); line-height: 1.05;
+  }
+  .s6 .headline em { font-style: italic; font-weight: 400; color: var(--olive-light); }
+
+  .s6 .footer {
+    position: absolute;
+    bottom: 36px; left: 40px;
+  }
+  .s6 .link-tag {
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--olive-light); font-family: 'DM Sans', sans-serif;
+    margin-bottom: 4px;
+  }
+  .s6 .link-url {
+    font-size: 13px; font-weight: 500;
+    color: var(--linen); font-family: 'DM Sans', sans-serif;
+  }
 </style>
-
 </head>
 <body>
 
-<h1>Job Board Launch Carousel — paigelovespilates.com</h1>
+<span class="deck-label">Job Board Launch — paigelovespilates.com</span>
 
-<!-- SLIDE 1 -->
-
+<!-- 01 — THE PROBLEM -->
 <div class="slide s1">
-  <span class="badge">NOW LIVE</span>
-  <span class="slide-num">01 / 06</span>
+  <span class="s-label">THE PROBLEM</span>
+  <span class="s-num">01 / 06</span>
   <div class="headline">
-    <span class="line1">Pilates</span>
-    <span class="line2">Job</span>
-    <span class="line3">Board</span>
+    You apply.<br>
+    You interview.<br>
+    <em>Then</em> you find out the pay?
   </div>
   <div class="footer">
-    <span class="tagline">Jobs that are actually worth taking.</span>
-    <span class="url">paigelovespilates.com</span>
+    <div class="footer-tag">Rebuilding the fitness industry with transparency</div>
+    <div class="footer-url">paigelovespilates.com/database</div>
   </div>
 </div>
 
-<!-- SLIDE 2 -->
-
+<!-- 02 — THE PLATFORM -->
 <div class="slide s2">
-  <span class="section-label">THE PROBLEM</span>
-  <span class="slide-num">02 / 06</span>
-  <div class="rule"></div>
+  <span class="s-label">THE PLATFORM</span>
+  <span class="s-num">02 / 06</span>
   <div class="headline">
-    Finding a job<br>shouldn't mean<br><em>settling</em>.
+    Pay secrecy keeps<br><em>instructors</em><br>underpaid.
   </div>
-  <p class="body">Most Pilates job listings don't tell you what they pay. You apply, you interview, you find out the rate after you're already invested. That's not an accident — it's a system that works against instructors.</p>
-  <span class="footer-label">Pilates Job Board</span>
+  <p class="sub">We built a platform — which now includes a Job Board — to change that. Real studios, real opportunities, real data.</p>
+  <div class="journey">
+    <div class="j-item">
+      <span class="j-num">I</span>
+      <span class="j-name">Salary Database</span>
+      <span class="j-tag">Know the market</span>
+      <span class="j-arrow">→</span>
+    </div>
+    <div class="j-item">
+      <span class="j-num">II</span>
+      <span class="j-name">Negotiation Brief</span>
+      <span class="j-tag">Identify where you fit</span>
+      <span class="j-arrow">→</span>
+    </div>
+    <div class="j-item is-new">
+      <span class="j-num">III</span>
+      <span class="j-name">Job Board</span>
+      <span class="j-tag">Find your opportunity</span>
+      <span class="j-arrow">→</span>
+    </div>
+  </div>
 </div>
 
-<!-- SLIDE 3 -->
-
+<!-- 03 — THE LISTING CARD -->
 <div class="slide s3">
-  <span class="section-label">WHAT'S INSIDE</span>
-  <span class="slide-num">03 / 06</span>
-  <div class="headline">Everything you need<br>to find a job<br><em>worth having</em></div>
+  <span class="s-label">REAL OPPORTUNITIES. PAY INCLUDED.</span>
+  <span class="s-num">03 / 06</span>
+  <div class="headline">This is what a <em>job listing</em> looks like</div>
+  <div class="card">
+    <div class="card-studio">Bloom Studio</div>
+    <div class="card-db-link">→ See studio in Salary Database</div>
+    <div class="card-location">Brooklyn, NY</div>
+    <div class="card-badges">
+      <span class="badge-type">Sub</span>
+      <span class="badge-format">Reformer</span>
+    </div>
+    <div class="card-details">
+      <div class="detail-row">
+        <span class="detail-label">Schedule</span>
+        <span>Flexible — as needed</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Posted</span>
+        <span>Apr 14, 2026</span>
+      </div>
+    </div>
+    <div class="card-pay">$52–$58 per class · experience-based</div>
+    <div class="card-notes">
+      <div class="card-notes-label">From the studio</div>
+      Great way to get to know us before committing full-time.
+    </div>
+    <div class="card-cta">
+      <div class="btn btn-primary">Reach out</div>
+      <div class="btn btn-secondary">Raise your hand</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 — WHAT'S INSIDE -->
+<div class="slide s4">
+  <span class="s-label">WHAT'S INSIDE</span>
+  <span class="s-num">04 / 06</span>
+  <div class="headline">Everything you need<br>to find a job <em>worth having</em></div>
   <div class="list">
     <div class="list-item">
       <span class="item-num">01</span>
       <div class="item-text">
-        <strong>Pay transparency</strong>
-        <span>Rate listed on every job posting</span>
+        <strong>Sub & full-time positions</strong>
+        <span>Sub first — earn more, stay flexible, know if it's the right fit before you commit</span>
       </div>
     </div>
     <div class="list-item">
       <span class="item-num">02</span>
       <div class="item-text">
-        <strong>Salary Database link</strong>
-        <span>Cross-reference before you apply</span>
+        <strong>Every listing links to the Salary Database</strong>
+        <span>See what instructors like about working there, the perks they get, how their negotiations went — before you apply</span>
       </div>
     </div>
     <div class="list-item">
       <span class="item-num">03</span>
       <div class="item-text">
-        <strong>Format & location filters</strong>
-        <span>Reformer, mat, barre — find your fit</span>
+        <strong>Filter by format & location</strong>
+        <span>Reformer, mat, yoga, sculpt — find your fit</span>
       </div>
     </div>
     <div class="list-item">
       <span class="item-num">04</span>
       <div class="item-text">
-        <strong>Real studios, real listings</strong>
-        <span>No ghost jobs, no bait-and-switch</span>
+        <strong>Reach out or raise your hand</strong>
+        <span>Connect with studios directly from the listing</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 4 -->
-
-<div class="slide s4">
-  <span class="section-label">REAL LISTINGS. PAY INCLUDED.</span>
-  <span class="slide-num">04 / 06</span>
-  <div class="headline">This is what a<br><em>job listing</em> looks like</div>
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="studio-name">Bloom Studio</div>
-        <div class="studio-location">📍 Brooklyn, NY</div>
-      </div>
-      <span class="badge-new">↑ Now hiring</span>
-    </div>
-    <div class="job-row">
-      <div>
-        <div class="job-title">Reformer — Experienced</div>
-        <div class="job-detail">3+ years required</div>
-      </div>
-      <div class="job-pay">
-        <div class="pay-label">Per class</div>
-        <div class="pay-amount">$58</div>
-      </div>
-    </div>
-    <div class="job-row">
-      <div>
-        <div class="job-title">Reformer — New Instructor</div>
-        <div class="job-detail">Open to recent grads</div>
-      </div>
-      <div class="job-pay">
-        <div class="pay-label">Per class</div>
-        <div class="pay-amount">$42</div>
-      </div>
-    </div>
-    <div class="job-row">
-      <div>
-        <div class="job-title">Heated Mat</div>
-        <div class="job-detail">Weekend availability preferred</div>
-      </div>
-      <div class="job-pay">
-        <div class="pay-label">Per class</div>
-        <div class="pay-amount">$45</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 5 -->
-
+<!-- 05 — FREE FOR EVERYONE -->
 <div class="slide s5">
-  <span class="section-label">HOW IT WORKS</span>
-  <span class="slide-num">05 / 06</span>
+  <span class="s-label">HOW IT WORKS</span>
+  <span class="s-num">05 / 06</span>
   <div class="headline">
-    Free.<br>
-    <span class="muted">Open to all.</span>
-    No paywall.
+    Free for<br><em>instructors.</em><br>Free for studios.
   </div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-circle">1</div>
-      <div class="step-content">
-        <strong>Browse open positions</strong>
-        <span>Filter by city, format, or experience level</span>
-      </div>
+  <div class="cards">
+    <div class="who-card">
+      <div class="who-eyebrow">Instructors</div>
+      <div class="who-heading">Browse & apply</div>
+      <div class="who-rule"></div>
+      <div class="who-body">Free account. 10 seconds to sign up. Already on the Salary Database? Same login.</div>
     </div>
-    <div class="step">
-      <div class="step-circle">2</div>
-      <div class="step-content">
-        <strong>See the pay before you apply</strong>
-        <span>Every listing includes the rate</span>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-circle">3</div>
-      <div class="step-content">
-        <strong>Walk in knowing your number</strong>
-        <span>Cross-reference with the Salary Database</span>
-      </div>
+    <div class="who-card studio">
+      <div class="who-eyebrow">Studios</div>
+      <div class="who-heading">Post a job</div>
+      <div class="who-rule"></div>
+      <div class="who-body">Free to post. Reach instructors who are already here comparing opportunities.</div>
     </div>
   </div>
   <div class="footer">
-    <span class="footer-note">Studios can post jobs too →</span>
-    <span class="cta-pill">paigelovespilates.com/jobs</span>
+    <span class="footer-note">No paywall. No catch.</span>
+    <span class="cta-pill">paigelovespilates.com/database</span>
   </div>
 </div>
 
-<!-- SLIDE 6 -->
-
+<!-- 06 — CLOSING CTA -->
 <div class="slide s6">
-  <span class="link-label">LINK IN BIO</span>
-  <span class="slide-num">06 / 06</span>
+  <span class="s-label">LINK IN BIO</span>
+  <span class="s-num">06 / 06</span>
   <div class="center-block">
-    <div class="eyebrow">KNOW YOUR WORTH</div>
-    <div class="headline">You deserve<br>a job that <em>pays</em>.</div>
-    <div class="subline">Now you can find one.</div>
+    <div class="eyebrow">TRANSPARENCY THAT EMPOWERS</div>
+    <div class="headline">Know the market.<br>Know your worth.<br><em>Now go find your job.</em></div>
   </div>
   <div class="footer">
-    <div class="link-group">
-      <div class="link-tag">BROWSE JOBS</div>
-      <div class="link-url">paigelovespilates.com/jobs</div>
-    </div>
-    <div class="link-group">
-      <div class="link-tag">POST A JOB</div>
-      <div class="link-url muted">paigelovespilates.com/post</div>
-    </div>
+    <div class="link-tag">Get started</div>
+    <div class="link-url">paigelovespilates.com/database</div>
   </div>
 </div>
 
