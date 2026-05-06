@@ -580,7 +580,7 @@
   <div class="slide slide-5">
     <div class="eyebrow">paigelovespilates.com/database</div>
     <h2>See how your city stacks up.</h2>
-    <p>Curious how these stats look for other cities around the world? Join the free Studio Salary Database.</p>
+    <p>Curious how these stats look for other cities or specific studios around the world? Join the free Studio Salary Database.</p>
     <div class="cta-pill">Join the database</div>
     <div class="handle">@paigelovespilates</div>
   </div>
@@ -600,6 +600,23 @@
   <button id="next" onclick="changeSlide(1)">→</button>
 </div>
 <div class="slide-label" id="slide-label">Slide 1 of 5</div>
+<button onclick="saveSlide()" style="
+  margin-top: 14px;
+  padding: 12px 28px;
+  background: #E4E0D5;
+  border: none;
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #373930;
+  cursor: pointer;
+">↓ Save this slide</button>
+<div style="font-family: 'DM Sans', sans-serif; font-size: 11px; color: #666; margin-top: 8px; text-align: center;">
+  iPhone: long-press the slide image → Save to Photos
+</div>
 
 <script>
   let current = 0;
@@ -618,6 +635,34 @@
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current === slides.length - 1;
     label.textContent = `Slide ${current + 1} of ${slides.length}`;
+  }
+
+  function saveSlide() {
+    const slide = slides[current];
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    script.onload = () => {
+      html2canvas(slide, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = `ny-vs-la-slide-${current + 1}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
+    };
+    if (window.html2canvas) {
+      html2canvas(slide, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = `ny-vs-la-slide-${current + 1}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
+    } else {
+      document.head.appendChild(script);
+    }
   }
 </script>
 
