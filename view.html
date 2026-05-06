@@ -1,600 +1,633 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Job Board Launch Carousel v13 — Paige Loves Pilates</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>NY vs LA Carousel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --olive:       #373930;
-    --olive-muted: #5a5d4e;
-    --olive-light: #8a8c7a;
-    --linen:       #EDEBE4;
-    --linen-mid:   #E0DDD4;
-    --rule:        #CCCAB8;
-    --mid:         #6E6C64;
-    --dark:        #2C2C28;
-    --white:       #F5F4F0;
-    --slide-size:  min(540px, 90vw);
-  }
+:root {
+–olive: #373930;
+–linen: #EDEBE4;
+–linen-dark: #E0DDD5;
+–olive-light: #4a4d40;
+–accent: #8B7355;
+}
 
-  body {
-    background: #1e1f1a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-    gap: 4px;
-    font-family: 'DM Sans', sans-serif;
-  }
+body {
+background: #2a2a2a;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+font-family: ‘DM Sans’, sans-serif;
+padding: 24px;
+gap: 20px;
+}
 
-  .deck-label {
-    color: rgba(237,235,228,0.3);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    align-self: flex-start;
-    margin-left: calc((100vw - min(540px, 90vw)) / 2);
-  }
+.carousel-wrapper {
+position: relative;
+width: 540px;
+height: 540px;
+}
 
-  .slide {
-    width: var(--slide-size);
-    height: var(--slide-size);
-    position: relative;
-    flex-shrink: 0;
-    overflow: hidden;
-  }
+.slide {
+display: none;
+width: 540px;
+height: 540px;
+position: relative;
+overflow: hidden;
+}
 
-  .s-label {
-    position: absolute;
-    top: 40px; left: 40px;
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    font-family: 'DM Sans', sans-serif; font-weight: 400;
-  }
-  .s-num {
-    position: absolute;
-    top: 40px; right: 40px;
-    font-size: 11px; letter-spacing: 0.08em;
-    font-family: 'DM Sans', sans-serif;
-  }
+.slide.active { display: flex; }
 
-  /* ══════════════════════════════════════════
-     SLIDE 1 — THE PROBLEM  (linen)
-  ══════════════════════════════════════════ */
-  .s1 { background: var(--linen); }
-  .s1 .s-label { color: var(--olive-muted); }
-  .s1 .s-num   { color: var(--olive-light); }
+/* ── SLIDE LAYOUTS ── */
 
-  .s1 .headline {
-    position: absolute;
-    top: 50%; left: 40px; right: 40px;
-    transform: translateY(-50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(42px, 9.5vw, 60px);
-    color: var(--olive); line-height: 1.05;
-  }
-  .s1 .headline em { font-style: italic; font-weight: 400; color: var(--olive-muted); }
+/* Linen background slides */
+.slide-linen {
+background: var(–linen);
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 60px 56px;
+}
 
-  .s1 .footer {
-    position: absolute;
-    bottom: 40px; left: 40px;
-  }
-  .s1 .footer-tag {
-    font-size: 11px; font-weight: 300; letter-spacing: 0.04em;
-    color: var(--olive-muted); margin-bottom: 4px;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .s1 .footer-url {
-    font-size: 12px; font-weight: 400;
-    color: var(--olive-light);
-    font-family: 'DM Sans', sans-serif; letter-spacing: 0.02em;
-  }
+/* Olive background slides */
+.slide-olive {
+background: var(–olive);
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 60px 56px;
+}
 
-  /* ══════════════════════════════════════════
-     SLIDE 2 — PLATFORM JOURNEY  (olive)
-  ══════════════════════════════════════════ */
-  .s2 { background: var(--olive); }
-  .s2 .s-label { color: var(--olive-light); }
-  .s2 .s-num   { color: rgba(237,235,228,0.35); }
+/* ── SLIDE 1: Hook ── */
+.slide-1 {
+background: var(–linen);
+flex-direction: column;
+align-items: flex-start;
+justify-content: center;
+padding: 64px 60px;
+}
 
-  .s2 .headline {
-    position: absolute;
-    top: 80px; left: 40px; right: 40px;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(36px, 7.5vw, 46px);
-    color: var(--linen); line-height: 1.05;
-  }
-  .s2 .headline em { font-style: italic; font-weight: 400; color: var(--olive-light); }
+.slide-1 .eyebrow {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(–olive);
+opacity: 0.45;
+margin-bottom: 28px;
+}
 
-  .s2 .sub {
-    position: absolute;
-    top: 248px; left: 40px; right: 40px;
-    font-size: 12px; font-weight: 300; line-height: 1.6;
-    color: rgba(237,235,228,0.55);
-  }
+.slide-1 h1 {
+font-family: ‘Playfair Display’, serif;
+font-size: 42px;
+font-weight: 600;
+line-height: 1.18;
+color: var(–olive);
+max-width: 380px;
+}
 
-  .s2 .journey {
-    position: absolute;
-    top: 310px; left: 40px; right: 40px;
-    height: 148px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border: 1px solid rgba(237,235,228,0.18);
-    border-radius: 2px;
-    overflow: hidden;
-  }
+.slide-1 h1 em {
+font-style: italic;
+color: var(–olive);
+opacity: 0.75;
+}
 
-  .s2 .j-item {
-    display: flex; flex-direction: column;
-    padding: 12px 12px 30px;
-    border-right: 1px solid rgba(237,235,228,0.18);
-    position: relative;
-  }
-  .s2 .j-item:last-child { border-right: none; }
+.slide-1 .divider {
+width: 40px;
+height: 1px;
+background: var(–olive);
+opacity: 0.2;
+margin-top: 36px;
+}
 
-  .s2 .j-item::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--linen);
-    opacity: 0;
-  }
+.slide-1 .handle {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+letter-spacing: 0.12em;
+color: var(–olive);
+opacity: 0.35;
+margin-top: 12px;
+}
 
-  .s2 .j-item.is-new { background: rgba(237,235,228,0.06); }
-  .s2 .j-item.is-new::before { opacity: 1; }
+/* ── SLIDE 2: Intro ── */
+.slide-2 {
+background: var(–linen);
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 64px 60px;
+text-align: center;
+}
 
-  .s2 .j-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px; font-weight: 400; letter-spacing: 0.12em;
-    color: var(--olive-light); margin-bottom: 7px;
-  }
-  .s2 .j-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px; font-weight: 400;
-    color: var(--linen); line-height: 1.15; margin-bottom: 4px;
-  }
-  .s2 .j-tag {
-    font-size: 9px; font-weight: 400;
-    letter-spacing: 0.11em; text-transform: uppercase;
-    color: var(--olive-light); line-height: 1.5;
-  }
-  .s2 .j-item.is-new .j-num,
-  .s2 .j-item.is-new .j-tag { color: rgba(237,235,228,0.5); }
-  .s2 .j-item.is-new .j-name { color: var(--linen); }
+.slide-2 .number {
+font-family: ‘Playfair Display’, serif;
+font-size: 100px;
+font-weight: 600;
+color: var(–olive);
+opacity: 0.06;
+line-height: 1;
+position: absolute;
+top: 40px;
+left: 50%;
+transform: translateX(-50%);
+white-space: nowrap;
+}
 
-  .s2 .j-arrow {
-    position: absolute;
-    bottom: 12px; right: 12px;
-    font-size: 11px; color: rgba(237,235,228,0.22);
-    font-family: 'DM Sans', sans-serif;
-  }
-  .s2 .j-item.is-new .j-arrow { color: rgba(237,235,228,0.45); }
+.slide-2 .intro-label {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(–olive);
+opacity: 0.45;
+margin-bottom: 24px;
+}
 
-  /* ══════════════════════════════════════════
-     SLIDE 3 — THE LISTING CARD  (linen)
-  ══════════════════════════════════════════ */
-  .s3 { background: var(--linen); }
-  .s3 .s-label { color: var(--olive-muted); }
-  .s3 .s-num   { color: var(--olive-light); }
+.slide-2 h2 {
+font-family: ‘Playfair Display’, serif;
+font-size: 32px;
+font-weight: 400;
+line-height: 1.3;
+color: var(–olive);
+}
 
-  .s3 .headline {
-    position: absolute;
-    top: 88px; left: 40px; right: 40px;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(24px, 5vw, 34px);
-    color: var(--olive); line-height: 1.1;
-  }
-  .s3 .headline em { font-style: italic; font-weight: 400; color: var(--olive-muted); }
+.slide-2 h2 em {
+font-style: italic;
+}
 
-  .s3 .card {
-    position: absolute;
-    top: 178px; left: 40px; right: 40px; bottom: 36px;
-    background: white;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    padding: 13px 15px;
-    box-shadow: 0 2px 14px rgba(55,57,48,0.07);
-    display: flex; flex-direction: column;
-  }
-  .s3 .card-studio {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px; font-weight: 400; color: var(--dark);
-    margin-bottom: 1px;
-  }
-  .s3 .card-db-link {
-    font-size: 10px; color: var(--olive-light);
-    margin-bottom: 5px; display: block;
-  }
-  .s3 .card-location {
-    font-size: 11px; color: var(--mid);
-    font-weight: 300; margin-bottom: 8px;
-  }
-  .s3 .card-badges {
-    display: flex; gap: 6px; margin-bottom: 9px;
-  }
-  .s3 .badge-type {
-    font-size: 10px; letter-spacing: 0.07em;
-    padding: 3px 9px; border-radius: 2px;
-    background: var(--olive); color: var(--linen);
-  }
-  .s3 .badge-format {
-    font-size: 10px; letter-spacing: 0.07em;
-    padding: 3px 9px; border-radius: 2px;
-    background: var(--linen); color: var(--mid);
-    border: 1px solid var(--rule);
-  }
-  .s3 .card-details {
-    border-top: 1px solid #e8e6de;
-    border-bottom: 1px solid #e8e6de;
-    padding: 7px 0; margin-bottom: 8px;
-    display: flex; flex-direction: column; gap: 5px;
-  }
-  .s3 .detail-row {
-    display: flex; justify-content: space-between;
-    font-size: 11px; font-weight: 300; color: var(--mid);
-  }
-  .s3 .detail-label {
-    font-size: 9px; font-weight: 500;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--olive-light);
-  }
-  .s3 .card-pay {
-    background: var(--linen);
-    padding: 7px 12px; text-align: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px; color: var(--olive);
-    border-radius: 2px; margin-bottom: 7px;
-  }
-  .s3 .card-notes {
-    font-size: 11px; color: var(--mid); line-height: 1.5;
-    margin-bottom: 9px; padding-top: 7px;
-    border-top: 1px solid #e8e6de; flex-shrink: 0;
-  }
-  .s3 .card-notes-label {
-    font-size: 9px; font-weight: 500;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--olive-light); margin-bottom: 3px;
-  }
-  .s3 .card-cta {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    margin-top: auto;
-  }
-  .s3 .btn {
-    font-size: 10px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 8px 10px; border-radius: 2px;
-    text-align: center; font-family: 'DM Sans', sans-serif;
-  }
-  .s3 .btn-primary  { background: var(--olive); color: var(--linen); border: none; }
-  .s3 .btn-secondary { background: transparent; color: var(--mid); border: 1px solid var(--rule); }
+.slide-2 .criteria {
+margin-top: 36px;
+display: flex;
+gap: 32px;
+}
 
-  /* ══════════════════════════════════════════
-     SLIDE 4 — WHAT'S INSIDE  (olive)
-  ══════════════════════════════════════════ */
-  .s4 { background: var(--olive); }
-  .s4 .s-label { color: var(--olive-light); }
-  .s4 .s-num   { color: rgba(237,235,228,0.35); }
+.slide-2 .criterion {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 8px;
+}
 
-  .s4 .headline {
-    position: absolute;
-    top: 96px; left: 40px; right: 40px;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(30px, 6.5vw, 42px);
-    color: var(--linen); line-height: 1.05;
-  }
-  .s4 .headline em { font-style: italic; font-weight: 400; color: var(--olive-light); }
+.slide-2 .criterion-dot {
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: var(–accent);
+}
 
-  .s4 .list {
-    position: absolute;
-    top: 238px; left: 40px; right: 40px; bottom: 60px;
-    display: flex; flex-direction: column; justify-content: space-between;
-  }
-  .s4 .list-item {
-    display: flex; align-items: flex-start; gap: 18px;
-    padding: 10px 0;
-    border-top: 1px solid rgba(237,235,228,0.12);
-    flex: 1;
-  }
-  .s4 .list-item:last-child { border-bottom: 1px solid rgba(237,235,228,0.12); }
-  .s4 .item-num {
-    font-size: 11px; color: var(--olive-light);
-    letter-spacing: 0.06em; min-width: 22px; padding-top: 1px;
-    font-family: 'DM Sans', sans-serif; flex-shrink: 0;
-  }
-  .s4 .item-text strong {
-    font-size: 13px; font-weight: 500;
-    color: var(--linen); display: block; margin-bottom: 2px;
-  }
-  .s4 .item-text span {
-    font-size: 11.5px; font-weight: 300; color: var(--olive-light);
-    line-height: 1.45;
-  }
+.slide-2 .criterion-label {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 12px;
+font-weight: 400;
+color: var(–olive);
+opacity: 0.6;
+letter-spacing: 0.05em;
+}
 
-  /* ══════════════════════════════════════════
-     SLIDE 5 — FREE FOR EVERYONE  (linen)
-  ══════════════════════════════════════════ */
-  .s5 { background: var(--linen); }
-  .s5 .s-label { color: var(--olive-muted); }
-  .s5 .s-num   { color: var(--olive-light); }
+/* ── SLIDE 3: Pay ── */
+.slide-3 {
+background: var(–linen);
+flex-direction: column;
+align-items: flex-start;
+justify-content: center;
+padding: 64px 60px;
+}
 
-  .s5 .headline {
-    position: absolute;
-    top: 110px; left: 40px; right: 40px;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(32px, 7vw, 44px);
-    color: var(--olive); line-height: 1.0;
-  }
-  .s5 .headline em { font-style: italic; font-weight: 400; color: var(--olive-muted); }
+.slide-3 .topic-label {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(–olive);
+opacity: 0.45;
+margin-bottom: 20px;
+}
 
-  .s5 .cards {
-    position: absolute;
-    top: 272px; left: 40px; right: 40px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  }
-  .s5 .who-card {
-    background: white;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    padding: 14px;
-  }
-  .s5 .who-card.studio {
-    background: var(--olive);
-    border-color: var(--olive);
-  }
-  .s5 .who-eyebrow {
-    font-size: 9px; font-weight: 500;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--olive-light); margin-bottom: 8px;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .s5 .who-card.studio .who-eyebrow { color: rgba(237,235,228,0.45); }
-  .s5 .who-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 19px; font-weight: 600;
-    color: var(--olive); margin-bottom: 8px; line-height: 1.1;
-  }
-  .s5 .who-card.studio .who-heading { color: var(--linen); }
-  .s5 .who-rule {
-    width: 20px; height: 1px;
-    background: var(--rule); margin-bottom: 8px;
-  }
-  .s5 .who-card.studio .who-rule { background: rgba(237,235,228,0.2); }
-  .s5 .who-body {
-    font-size: 12px; font-weight: 300;
-    color: var(--mid); line-height: 1.55;
-  }
-  .s5 .who-card.studio .who-body { color: rgba(237,235,228,0.55); }
+.slide-3 .headline {
+font-family: ‘Playfair Display’, serif;
+font-size: 22px;
+font-weight: 400;
+color: var(–olive);
+opacity: 0.8;
+margin-bottom: 44px;
+line-height: 1.4;
+}
 
-  .s5 .footer {
-    position: absolute;
-    bottom: 36px; left: 40px; right: 40px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .s5 .footer-note {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 13px; color: var(--olive-light);
-  }
-  .s5 .cta-pill {
-    background: var(--olive); color: var(--linen);
-    font-size: 11px; letter-spacing: 0.06em;
-    padding: 10px 18px; border-radius: 100px;
-    font-family: 'DM Sans', sans-serif; font-weight: 400;
-  }
+.pay-row {
+display: flex;
+align-items: flex-end;
+gap: 48px;
+margin-bottom: 36px;
+}
 
-  /* ══════════════════════════════════════════
-     SLIDE 6 — CLOSING CTA  (olive)
-  ══════════════════════════════════════════ */
-  .s6 { background: var(--olive); }
-  .s6 .s-num   { color: rgba(237,235,228,0.35); }
-  .s6 .s-label { color: var(--olive-light); }
+.pay-city {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
 
-  .s6 .center-block {
-    position: absolute;
-    top: 50%; left: 40px; right: 40px;
-    transform: translateY(-55%);
-    text-align: center;
-  }
-  .s6 .eyebrow {
-    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--olive-light); font-family: 'DM Sans', sans-serif;
-    margin-bottom: 16px;
-  }
-  .s6 .headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(36px, 8vw, 52px);
-    color: var(--linen); line-height: 1.05;
-  }
-  .s6 .headline em { font-style: italic; font-weight: 400; color: var(--olive-light); }
+.pay-city .city-name {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–olive);
+opacity: 0.5;
+}
 
-  .s6 .footer {
-    position: absolute;
-    bottom: 36px; left: 40px;
-  }
-  .s6 .link-tag {
-    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--olive-light); font-family: 'DM Sans', sans-serif;
-    margin-bottom: 4px;
-  }
-  .s6 .link-url {
-    font-size: 13px; font-weight: 500;
-    color: var(--linen); font-family: 'DM Sans', sans-serif;
-  }
+.pay-city .amount {
+font-family: ‘Playfair Display’, serif;
+font-weight: 600;
+color: var(–olive);
+line-height: 1;
+}
+
+.pay-city.winner .amount {
+font-size: 72px;
+color: var(–olive);
+}
+
+.pay-city.loser .amount {
+font-size: 52px;
+color: var(–olive);
+opacity: 0.35;
+}
+
+.pay-city .winner-badge {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 10px;
+font-weight: 500;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(–olive);
+background: rgba(55,57,48,0.08);
+padding: 4px 10px;
+border-radius: 2px;
+display: inline-block;
+margin-top: 4px;
+width: fit-content;
+}
+
+.slide-3 .footnote {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+color: var(–olive);
+opacity: 0.35;
+letter-spacing: 0.04em;
+}
+
+/* ── SLIDE 4: Satisfaction ── */
+.slide-4 {
+background: var(–linen);
+flex-direction: column;
+align-items: flex-start;
+justify-content: center;
+padding: 64px 60px;
+}
+
+.slide-4 .topic-label {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(–olive);
+opacity: 0.45;
+margin-bottom: 20px;
+}
+
+.slide-4 .headline {
+font-family: ‘Playfair Display’, serif;
+font-size: 26px;
+font-weight: 600;
+color: var(–olive);
+line-height: 1.25;
+margin-bottom: 8px;
+}
+
+.slide-4 .subheadline {
+font-family: ‘Playfair Display’, serif;
+font-style: italic;
+font-size: 20px;
+font-weight: 400;
+color: var(–olive);
+opacity: 0.55;
+margin-bottom: 44px;
+}
+
+.sat-bars {
+display: flex;
+flex-direction: column;
+gap: 18px;
+width: 100%;
+}
+
+.sat-row {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.sat-row-top {
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+}
+
+.sat-city {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–olive);
+opacity: 0.55;
+}
+
+.sat-pct {
+font-family: ‘Playfair Display’, serif;
+font-size: 18px;
+font-weight: 600;
+color: var(–olive);
+}
+
+.sat-bar-track {
+width: 100%;
+height: 3px;
+background: rgba(55,57,48,0.1);
+border-radius: 2px;
+overflow: hidden;
+}
+
+.sat-bar-fill {
+height: 100%;
+border-radius: 2px;
+background: var(–olive);
+}
+
+.sat-bar-fill.dim { background: var(–olive); opacity: 0.25; }
+
+.slide-4 .footnote {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 10px;
+color: var(–olive);
+opacity: 0.35;
+margin-top: 28px;
+letter-spacing: 0.04em;
+}
+
+/* ── SLIDE 5: CTA ── */
+.slide-5 {
+background: var(–olive);
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 64px 60px;
+text-align: center;
+}
+
+.slide-5 .eyebrow {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(–linen);
+opacity: 0.45;
+margin-bottom: 24px;
+}
+
+.slide-5 h2 {
+font-family: ‘Playfair Display’, serif;
+font-size: 34px;
+font-weight: 600;
+line-height: 1.2;
+color: var(–linen);
+margin-bottom: 16px;
+max-width: 360px;
+}
+
+.slide-5 p {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 14px;
+font-weight: 300;
+line-height: 1.6;
+color: var(–linen);
+opacity: 0.6;
+max-width: 320px;
+margin-bottom: 44px;
+}
+
+.slide-5 .cta-pill {
+border: 1px solid rgba(237,235,228,0.35);
+border-radius: 2px;
+padding: 14px 28px;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–linen);
+}
+
+.slide-5 .handle {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+letter-spacing: 0.12em;
+color: var(–linen);
+opacity: 0.3;
+margin-top: 40px;
+}
+
+/* ── NAV ── */
+.nav {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+
+.nav button {
+background: var(–linen);
+border: none;
+border-radius: 2px;
+width: 40px;
+height: 40px;
+cursor: pointer;
+font-size: 16px;
+color: var(–olive);
+display: flex;
+align-items: center;
+justify-content: center;
+transition: opacity 0.2s;
+}
+
+.nav button:hover { opacity: 0.75; }
+.nav button:disabled { opacity: 0.25; cursor: default; }
+
+.dots {
+display: flex;
+gap: 6px;
+}
+
+.dot {
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: var(–linen);
+opacity: 0.25;
+transition: opacity 0.2s;
+}
+
+.dot.active { opacity: 1; }
+
+.slide-label {
+font-family: ‘DM Sans’, sans-serif;
+font-size: 11px;
+color: #999;
+letter-spacing: 0.1em;
+}
 </style>
+
 </head>
 <body>
 
-<span class="deck-label">Job Board Launch — paigelovespilates.com</span>
+<div class="carousel-wrapper">
 
-<!-- 01 — THE PROBLEM -->
-<div class="slide s1">
-  <span class="s-label">THE PROBLEM</span>
-  <span class="s-num">01 / 06</span>
-  <div class="headline">
-    You apply.<br>
-    You interview.<br>
-    <em>Then</em> you find out the pay?
-  </div>
-  <div class="footer">
-    <div class="footer-tag">Rebuilding the fitness industry with transparency</div>
-    <div class="footer-url">paigelovespilates.com/database</div>
-  </div>
-</div>
+  <!-- SLIDE 1 -->
 
-<!-- 02 — THE PLATFORM -->
-<div class="slide s2">
-  <span class="s-label">THE PLATFORM</span>
-  <span class="s-num">02 / 06</span>
-  <div class="headline">
-    Pay secrecy keeps<br><em>instructors</em><br>underpaid.
+  <div class="slide slide-1 active">
+    <div class="eyebrow">Studio Salary Database</div>
+    <h1>Is it better to be a Pilates instructor in <em>NY</em> or <em>LA</em>?</h1>
+    <div class="divider"></div>
+    <div class="handle">@paigelovespilates</div>
   </div>
-  <p class="sub">We built a platform — which now includes a Job Board — to change that. Real studios, real opportunities, real data.</p>
-  <div class="journey">
-    <div class="j-item">
-      <span class="j-num">I</span>
-      <span class="j-name">Salary Database</span>
-      <span class="j-tag">Know the market</span>
-      <span class="j-arrow">→</span>
-    </div>
-    <div class="j-item">
-      <span class="j-num">II</span>
-      <span class="j-name">Negotiation Brief</span>
-      <span class="j-tag">Identify where you fit</span>
-      <span class="j-arrow">→</span>
-    </div>
-    <div class="j-item is-new">
-      <span class="j-num">III</span>
-      <span class="j-name">Job Board</span>
-      <span class="j-tag">Find your opportunity</span>
-      <span class="j-arrow">→</span>
-    </div>
-  </div>
-</div>
 
-<!-- 03 — THE LISTING CARD -->
-<div class="slide s3">
-  <span class="s-label">REAL OPPORTUNITIES. PAY INCLUDED.</span>
-  <span class="s-num">03 / 06</span>
-  <div class="headline">This is what a <em>job listing</em> looks like</div>
-  <div class="card">
-    <div class="card-studio">Bloom Studio</div>
-    <div class="card-db-link">→ See studio in Salary Database</div>
-    <div class="card-location">Brooklyn, NY</div>
-    <div class="card-badges">
-      <span class="badge-type">Sub</span>
-      <span class="badge-format">Reformer</span>
-    </div>
-    <div class="card-details">
-      <div class="detail-row">
-        <span class="detail-label">Schedule</span>
-        <span>Flexible — as needed</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Posted</span>
-        <span>Apr 14, 2026</span>
-      </div>
-    </div>
-    <div class="card-pay">$52–$58 per class · experience-based</div>
-    <div class="card-notes">
-      <div class="card-notes-label">From the studio</div>
-      Great way to get to know us before committing full-time.
-    </div>
-    <div class="card-cta">
-      <div class="btn btn-primary">Reach out</div>
-      <div class="btn btn-secondary">Raise your hand</div>
-    </div>
-  </div>
-</div>
+  <!-- SLIDE 2 -->
 
-<!-- 04 — WHAT'S INSIDE -->
-<div class="slide s4">
-  <span class="s-label">WHAT'S INSIDE</span>
-  <span class="s-num">04 / 06</span>
-  <div class="headline">Everything you need<br>to find a job <em>worth having</em></div>
-  <div class="list">
-    <div class="list-item">
-      <span class="item-num">01</span>
-      <div class="item-text">
-        <strong>Sub & full-time positions</strong>
-        <span>Sub first — earn more, stay flexible, know if it's the right fit before you commit</span>
+  <div class="slide slide-2">
+    <div class="number">02</div>
+    <div class="intro-label">The breakdown</div>
+    <h2>Let's look at the data.<br>We'll consider <em>average pay</em><br>and <em>instructor satisfaction.</em></h2>
+    <div class="criteria">
+      <div class="criterion">
+        <div class="criterion-dot"></div>
+        <div class="criterion-label">Pay per class</div>
       </div>
-    </div>
-    <div class="list-item">
-      <span class="item-num">02</span>
-      <div class="item-text">
-        <strong>Every listing links to the Salary Database</strong>
-        <span>See what instructors like about working there, the perks they get, how their negotiations went — before you apply</span>
-      </div>
-    </div>
-    <div class="list-item">
-      <span class="item-num">03</span>
-      <div class="item-text">
-        <strong>Filter by format & location</strong>
-        <span>Reformer, mat, yoga, sculpt — find your fit</span>
-      </div>
-    </div>
-    <div class="list-item">
-      <span class="item-num">04</span>
-      <div class="item-text">
-        <strong>Reach out or raise your hand</strong>
-        <span>Connect with studios directly from the listing</span>
+      <div class="criterion">
+        <div class="criterion-dot"></div>
+        <div class="criterion-label">Instructor satisfaction</div>
       </div>
     </div>
   </div>
+
+  <!-- SLIDE 3 -->
+
+  <div class="slide slide-3">
+    <div class="topic-label">Pay per class</div>
+    <div class="headline">When it comes to pay,<br>NYC wins.</div>
+    <div class="pay-row">
+      <div class="pay-city winner">
+        <div class="city-name">New York</div>
+        <div class="amount">$52</div>
+        <div class="winner-badge">↑ Winner</div>
+      </div>
+      <div class="pay-city loser">
+        <div class="city-name">Los Angeles</div>
+        <div class="amount">$48</div>
+      </div>
+    </div>
+    <div class="footnote">An 8% difference · avg per class</div>
+  </div>
+
+  <!-- SLIDE 4 -->
+
+  <div class="slide slide-4">
+    <div class="topic-label">Instructor satisfaction</div>
+    <div class="headline">New York instructors are happier<br>than almost anywhere in the world.</div>
+    <div class="subheadline">LA is… average.</div>
+    <div class="sat-bars">
+      <div class="sat-row">
+        <div class="sat-row-top">
+          <div class="sat-city">New York</div>
+          <div class="sat-pct">86%</div>
+        </div>
+        <div class="sat-bar-track"><div class="sat-bar-fill" style="width:86%"></div></div>
+      </div>
+      <div class="sat-row">
+        <div class="sat-row-top">
+          <div class="sat-city">Los Angeles</div>
+          <div class="sat-pct">80%</div>
+        </div>
+        <div class="sat-bar-track"><div class="sat-bar-fill dim" style="width:80%"></div></div>
+      </div>
+      <div class="sat-row">
+        <div class="sat-row-top">
+          <div class="sat-city">Global avg</div>
+          <div class="sat-pct">79%</div>
+        </div>
+        <div class="sat-bar-track"><div class="sat-bar-fill dim" style="width:79%"></div></div>
+      </div>
+    </div>
+    <div class="footnote">Based on instructor-reported studio ratings</div>
+  </div>
+
+  <!-- SLIDE 5 -->
+
+  <div class="slide slide-5">
+    <div class="eyebrow">Free resource</div>
+    <h2>See how your city stacks up.</h2>
+    <p>Curious how these stats look for other cities around the world? Join the free Studio Salary Database.</p>
+    <div class="cta-pill">Join the database</div>
+    <div class="handle">@paigelovespilates</div>
+  </div>
+
 </div>
 
-<!-- 05 — FREE FOR EVERYONE -->
-<div class="slide s5">
-  <span class="s-label">HOW IT WORKS</span>
-  <span class="s-num">05 / 06</span>
-  <div class="headline">
-    Free for<br><em>instructors.</em><br>Free for studios.
-  </div>
-  <div class="cards">
-    <div class="who-card">
-      <div class="who-eyebrow">Instructors</div>
-      <div class="who-heading">Browse & apply</div>
-      <div class="who-rule"></div>
-      <div class="who-body">Free account. 10 seconds to sign up. Already on the Salary Database? Same login.</div>
-    </div>
-    <div class="who-card studio">
-      <div class="who-eyebrow">Studios</div>
-      <div class="who-heading">Post a job</div>
-      <div class="who-rule"></div>
-      <div class="who-body">Free to post. Reach instructors who are already here comparing opportunities.</div>
-    </div>
-  </div>
-  <div class="footer">
-    <span class="footer-note">No paywall. No catch.</span>
-    <span class="cta-pill">paigelovespilates.com/database</span>
-  </div>
-</div>
+<!-- NAV -->
 
-<!-- 06 — CLOSING CTA -->
-<div class="slide s6">
-  <span class="s-label">LINK IN BIO</span>
-  <span class="s-num">06 / 06</span>
-  <div class="center-block">
-    <div class="eyebrow">TRANSPARENCY THAT EMPOWERS</div>
-    <div class="headline">Know the market.<br>Know your worth.<br><em>Now go find your job.</em></div>
+<div class="nav">
+  <button id="prev" onclick="changeSlide(-1)" disabled>←</button>
+  <div class="dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
   </div>
-  <div class="footer">
-    <div class="link-tag">Get started</div>
-    <div class="link-url">paigelovespilates.com/database</div>
-  </div>
+  <button id="next" onclick="changeSlide(1)">→</button>
 </div>
+<div class="slide-label" id="slide-label">Slide 1 of 5</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const label = document.getElementById('slide-label');
+
+  function changeSlide(dir) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = Math.max(0, Math.min(slides.length - 1, current + dir));
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === slides.length - 1;
+    label.textContent = `Slide ${current + 1} of ${slides.length}`;
+  }
+</script>
 
 </body>
 </html>
