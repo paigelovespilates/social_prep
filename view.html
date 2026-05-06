@@ -127,56 +127,50 @@ function drawSlide1(canvas) {
   ctx.fillStyle = LINEN;
   ctx.fillRect(0,0,S,S);
 
+  const lh = 92;
+  // Total block: eyebrow(30) + gap(44) + 3 headline lines(3*92) + gap(64) + divider(2) + gap(24) + handle(30)
+  const totalH = 30 + 44 + lh*3 + 64 + 2 + 24 + 30;
+  let ty = (S - totalH) / 2;
+
   // eyebrow
   ctx.font = dmSans(22, 500);
   ctx.fillStyle = hex(OLIVE, 0.45);
   ctx.letterSpacing = '4px';
-  ctx.fillText('STUDIO SALARY DATABASE', pad, pad + 20);
+  ctx.fillText('STUDIO SALARY DATABASE', pad, ty + 22);
   ctx.letterSpacing = '0px';
+  ty += 30 + 44;
 
-  // headline — Playfair regular
-  const lines = [
-    { text: 'Is it better to be a', italic: false },
-    { text: 'Pilates instructor in', italic: false },
-    { text: 'NY', italic: true, inline: true, rest: ' or LA?' }
-  ];
-  let ty = pad + 100;
-  const lh = 88;
-
+  // headline line 1
+  ctx.font = playfair(80, 400, false);
   ctx.fillStyle = hex(OLIVE, 1);
-  ctx.font = playfair(76, 400, false);
   ctx.fillText('Is it better to be a', pad, ty); ty += lh;
   ctx.fillText('Pilates instructor in', pad, ty); ty += lh;
 
-  // "NY or LA?" with NY and LA italic
-  ctx.font = playfair(76, 400, false);
-  const beforeW = ctx.measureText('').width;
-  // draw "NY" italic
-  ctx.font = playfair(76, 400, true);
-  ctx.fillStyle = hex(OLIVE, 0.78);
+  // "NY or LA?" mixed italic
+  ctx.font = playfair(80, 400, true);
+  ctx.fillStyle = hex(OLIVE, 0.75);
   ctx.fillText('NY', pad, ty);
   const nyW = ctx.measureText('NY').width;
 
-  ctx.font = playfair(76, 400, false);
+  ctx.font = playfair(80, 400, false);
   ctx.fillStyle = hex(OLIVE, 1);
   ctx.fillText(' or ', pad + nyW, ty);
   const orW = ctx.measureText(' or ').width;
 
-  ctx.font = playfair(76, 400, true);
-  ctx.fillStyle = hex(OLIVE, 0.78);
+  ctx.font = playfair(80, 400, true);
+  ctx.fillStyle = hex(OLIVE, 0.75);
   ctx.fillText('LA', pad + nyW + orW, ty);
   const laW = ctx.measureText('LA').width;
 
-  ctx.font = playfair(76, 400, false);
+  ctx.font = playfair(80, 400, false);
   ctx.fillStyle = hex(OLIVE, 1);
   ctx.fillText('?', pad + nyW + orW + laW, ty);
-
-  ty += lh + 60;
+  ty += lh + 64;
 
   // divider
   ctx.fillStyle = hex(OLIVE, 0.18);
   ctx.fillRect(pad, ty, 72, 2);
-  ty += 28;
+  ty += 2 + 24;
 
   // handle
   ctx.font = dmSans(22, 400);
@@ -193,70 +187,63 @@ function drawSlide2(canvas) {
   ctx.fillStyle = LINEN;
   ctx.fillRect(0,0,S,S);
 
-  // ghost "02"
-  ctx.font = playfair(260, 600);
-  ctx.fillStyle = hex(OLIVE, 0.055);
+  // ghost "02" — centered vertically a bit above center
+  ctx.font = playfair(300, 600);
+  ctx.fillStyle = hex(OLIVE, 0.05);
   ctx.textAlign = 'center';
-  ctx.fillText('02', S/2, 260);
-  ctx.textAlign = 'left';
+  ctx.fillText('02', S/2, S/2 + 100);
+
+  // Total block: label(26) + gap(36) + 3 headline lines(3*76) + gap(56) + dots row(32)
+  const lh = 76;
+  const totalH = 26 + 36 + lh*3 + 56 + 32;
+  let ty = (S - totalH) / 2;
 
   // label
   ctx.font = dmSans(22, 500);
   ctx.fillStyle = hex(OLIVE, 0.45);
-  ctx.textAlign = 'center';
   ctx.letterSpacing = '4px';
-  ctx.fillText('THE BREAKDOWN', S/2, 380);
+  ctx.fillText('THE BREAKDOWN', S/2, ty + 22);
   ctx.letterSpacing = '0px';
+  ty += 26 + 36;
 
   // headline
-  const hl = 72;
-  ctx.font = playfair(64, 400, false);
+  ctx.font = playfair(66, 400, false);
   ctx.fillStyle = hex(OLIVE, 1);
-  ctx.fillText("Let's look at the data.", S/2, 480);
+  ctx.fillText("Let's look at the data.", S/2, ty); ty += lh;
+  ctx.fillText("We'll consider", S/2, ty); ty += lh;
 
-  ctx.fillText("We'll consider", S/2, 480 + hl);
+  // line 3: "average pay and instructor satisfaction."
+  ctx.font = playfair(66, 400, true);
+  const apW = ctx.measureText('average pay').width;
+  ctx.font = playfair(66, 400, false);
+  const andW = ctx.measureText(' and ').width;
+  ctx.font = playfair(66, 400, true);
+  const isW = ctx.measureText('instructor satisfaction.').width;
+  const totalLineW = apW + andW + isW;
+  let lx = S/2 - totalLineW/2;
 
-  // italic words inline
-  const line3y = 480 + hl*2;
-  const avgPay = 'average pay';
-  const and = ' and ';
-  const instrSat = 'instructor satisfaction.';
-
-  ctx.font = playfair(64, 400, true);
-  const apW = ctx.measureText(avgPay).width;
-  ctx.font = playfair(64, 400, false);
-  const andW = ctx.measureText(and).width;
-  ctx.font = playfair(64, 400, true);
-  const isW = ctx.measureText(instrSat).width;
-
-  const totalW = apW + andW + isW;
-  let lx = S/2 - totalW/2;
-
-  ctx.font = playfair(64, 400, true);
-  ctx.fillText(avgPay, lx, line3y); lx += apW;
-  ctx.font = playfair(64, 400, false);
-  ctx.fillText(and, lx, line3y); lx += andW;
-  ctx.font = playfair(64, 400, true);
-  ctx.fillText(instrSat, lx, line3y);
+  ctx.font = playfair(66, 400, true);
+  ctx.fillText('average pay', lx, ty); lx += apW;
+  ctx.font = playfair(66, 400, false);
+  ctx.fillText(' and ', lx, ty); lx += andW;
+  ctx.font = playfair(66, 400, true);
+  ctx.fillText('instructor satisfaction.', lx, ty);
+  ty += lh + 56;
 
   // criteria dots
-  const dotY = line3y + 90;
   const labels = ['Pay per class', 'Instructor satisfaction'];
-  const spacing = 260;
-  const startX = S/2 - spacing/2 - 80;
-
+  const colW = 280;
+  const startX = S/2 - colW;
   labels.forEach((label, i) => {
-    const lx2 = startX + i * spacing;
-    // dot
+    const lx2 = startX + i * colW;
     ctx.beginPath();
-    ctx.arc(lx2 + 6, dotY, 7, 0, Math.PI*2);
+    ctx.arc(lx2 + 7, ty - 4, 7, 0, Math.PI*2);
     ctx.fillStyle = ACCENT;
     ctx.fill();
-    // label
     ctx.font = dmSans(24, 400);
     ctx.fillStyle = hex(OLIVE, 0.6);
     ctx.textAlign = 'left';
-    ctx.fillText(label, lx2 + 22, dotY + 8);
+    ctx.fillText(label, lx2 + 22, ty + 4);
   });
 
   ctx.textAlign = 'left';
@@ -269,62 +256,62 @@ function drawSlide3(canvas) {
   ctx.fillStyle = LINEN;
   ctx.fillRect(0,0,S,S);
 
+  // Total block: label(26)+gap(32)+headline2lines(2*64)+gap(72)+city labels(26)+gap(12)+numbers(180)+gap(20)+badge(38)+gap(60)+footnote(26)
+  const totalH = 26+32+(64*2)+72+26+12+180+20+38+60+26;
+  let ty = (S - totalH) / 2;
+
   // topic label
   ctx.font = dmSans(22, 500);
   ctx.fillStyle = hex(OLIVE, 0.45);
   ctx.letterSpacing = '4px';
-  ctx.fillText('PAY PER CLASS', pad, pad + 20);
+  ctx.fillText('PAY PER CLASS', pad, ty + 22);
   ctx.letterSpacing = '0px';
+  ty += 26 + 32;
 
   // headline
-  ctx.font = playfair(52, 400);
+  ctx.font = playfair(56, 400);
   ctx.fillStyle = hex(OLIVE, 0.8);
-  ctx.fillText('When it comes to pay,', pad, pad + 110);
-  ctx.fillText('NYC wins.', pad, pad + 110 + 66);
+  ctx.fillText('When it comes to pay,', pad, ty); ty += 64;
+  ctx.fillText('NYC wins.', pad, ty); ty += 64 + 72;
 
-  // NYC big number
-  const numY = pad + 340;
+  // city name labels side by side
   ctx.font = dmSans(22, 500);
-  ctx.fillStyle = hex(OLIVE, 0.5);
   ctx.letterSpacing = '3px';
-  ctx.fillText('NEW YORK', pad, numY - 36);
+  ctx.fillStyle = hex(OLIVE, 0.5);
+  ctx.fillText('NEW YORK', pad, ty + 22);
+  ctx.fillStyle = hex(OLIVE, 0.28);
+  ctx.fillText('LOS ANGELES', pad + 300, ty + 22);
   ctx.letterSpacing = '0px';
+  ty += 26 + 12;
 
-  ctx.font = playfair(180, 600);
+  // big numbers
+  ctx.font = playfair(190, 600);
   ctx.fillStyle = hex(OLIVE, 1);
-  ctx.fillText('$52', pad, numY);
-  const nycW = ctx.measureText('$52').width;
+  ctx.fillText('$52', pad, ty + 180);
+
+  ctx.font = playfair(140, 600);
+  ctx.fillStyle = hex(OLIVE, 0.28);
+  ctx.fillText('$48', pad + 300, ty + 150);
+  ty += 180 + 20;
 
   // winner badge
-  const bx = pad, by = numY + 18;
   const btext = '↑  WINNER';
   ctx.font = dmSans(20, 500);
   ctx.letterSpacing = '2px';
-  const bw = ctx.measureText(btext).width + 28;
+  const bw = ctx.measureText(btext).width + 32;
   ctx.fillStyle = hex(OLIVE, 0.09);
   ctx.beginPath();
-  ctx.roundRect(bx, by, bw, 38, 3);
+  ctx.roundRect(pad, ty, bw, 38, 3);
   ctx.fill();
-  ctx.fillStyle = hex(OLIVE, 0.7);
-  ctx.fillText(btext, bx + 14, by + 26);
+  ctx.fillStyle = hex(OLIVE, 0.65);
+  ctx.fillText(btext, pad + 14, ty + 26);
   ctx.letterSpacing = '0px';
-
-  // LA number
-  const laX = pad + 280;
-  ctx.font = dmSans(22, 500);
-  ctx.fillStyle = hex(OLIVE, 0.3);
-  ctx.letterSpacing = '3px';
-  ctx.fillText('LOS ANGELES', laX, numY - 36);
-  ctx.letterSpacing = '0px';
-
-  ctx.font = playfair(130, 600);
-  ctx.fillStyle = hex(OLIVE, 0.3);
-  ctx.fillText('$48', laX, numY);
+  ty += 38 + 60;
 
   // footnote
   ctx.font = dmSans(22, 400);
   ctx.fillStyle = hex(OLIVE, 0.35);
-  ctx.fillText('An 8% difference  ·  avg per class', pad, S - pad);
+  ctx.fillText('An 8% difference  ·  avg per class', pad, ty + 22);
 }
 
 // ── SLIDE 4 ──
@@ -334,23 +321,29 @@ function drawSlide4(canvas) {
   ctx.fillStyle = LINEN;
   ctx.fillRect(0,0,S,S);
 
+  // Total block: label(26)+gap(32)+hl1(60)+gap(8)+hl2(60)+gap(8)+sub(52)+gap(60)+(3 bar rows: each 26+12+5+52=95)+footnote gap(40)+footnote(26)
+  const barRowH = 26 + 12 + 5 + 52;
+  const totalH = 26+32+60+8+60+8+52+60+(barRowH*3)+40+26;
+  let ty = (S - totalH) / 2;
+
   // topic label
   ctx.font = dmSans(22, 500);
   ctx.fillStyle = hex(OLIVE, 0.45);
   ctx.letterSpacing = '4px';
-  ctx.fillText('INSTRUCTOR SATISFACTION', pad, pad + 20);
+  ctx.fillText('INSTRUCTOR SATISFACTION', pad, ty + 22);
   ctx.letterSpacing = '0px';
+  ty += 26 + 32;
 
-  // headline (two lines)
+  // headline
   ctx.font = playfair(52, 600);
   ctx.fillStyle = hex(OLIVE, 1);
-  ctx.fillText('New York instructors are happier', pad, pad + 110);
-  ctx.fillText('than almost anywhere in the world.', pad, pad + 110 + 66);
+  ctx.fillText('New York instructors are happier', pad, ty + 52); ty += 60 + 8;
+  ctx.fillText('than almost anywhere in the world.', pad, ty + 52); ty += 60 + 8;
 
-  // subheadline italic
-  ctx.font = playfair(44, 400, true);
-  ctx.fillStyle = hex(OLIVE, 0.52);
-  ctx.fillText('LA is… average.', pad, pad + 110 + 66 + 72);
+  // subheadline
+  ctx.font = playfair(46, 400, true);
+  ctx.fillStyle = hex(OLIVE, 0.5);
+  ctx.fillText('LA is… average.', pad, ty + 46); ty += 52 + 60;
 
   // bars
   const barData = [
@@ -359,39 +352,32 @@ function drawSlide4(canvas) {
     { city: 'GLOBAL AVG', pct: 79, dim: true },
   ];
   const barW = S - pad*2;
-  let by = pad + 110 + 66 + 72 + 72;
 
   barData.forEach(d => {
-    // city name
     ctx.font = dmSans(22, 500);
-    ctx.fillStyle = hex(OLIVE, d.dim ? 0.35 : 0.55);
+    ctx.fillStyle = hex(OLIVE, d.dim ? 0.32 : 0.55);
     ctx.letterSpacing = '3px';
-    ctx.fillText(d.city, pad, by);
+    ctx.fillText(d.city, pad, ty + 22);
     ctx.letterSpacing = '0px';
 
-    // percentage
-    ctx.font = playfair(40, 600);
-    ctx.fillStyle = hex(OLIVE, d.dim ? 0.35 : 1);
+    ctx.font = playfair(42, 600);
+    ctx.fillStyle = hex(OLIVE, d.dim ? 0.32 : 1);
     ctx.textAlign = 'right';
-    ctx.fillText(d.pct + '%', S - pad, by);
+    ctx.fillText(d.pct + '%', S - pad, ty + 22);
     ctx.textAlign = 'left';
+    ty += 26 + 12;
 
-    by += 14;
-
-    // track
     ctx.fillStyle = hex(OLIVE, 0.1);
-    ctx.beginPath(); ctx.roundRect(pad, by, barW, 5, 2); ctx.fill();
-    // fill
+    ctx.beginPath(); ctx.roundRect(pad, ty, barW, 5, 2); ctx.fill();
     ctx.fillStyle = hex(OLIVE, d.dim ? 0.22 : 0.85);
-    ctx.beginPath(); ctx.roundRect(pad, by, barW * d.pct/100, 5, 2); ctx.fill();
-
-    by += 60;
+    ctx.beginPath(); ctx.roundRect(pad, ty, barW * d.pct/100, 5, 2); ctx.fill();
+    ty += 5 + 52;
   });
 
-  // footnote
+  ty += 40;
   ctx.font = dmSans(20, 400);
   ctx.fillStyle = hex(OLIVE, 0.32);
-  ctx.fillText('Based on instructor-reported studio ratings', pad, S - pad);
+  ctx.fillText('Based on instructor-reported studio ratings', pad, ty + 20);
 }
 
 // ── SLIDE 5 ──
@@ -400,45 +386,50 @@ function drawSlide5(canvas) {
   ctx.fillStyle = OLIVE;
   ctx.fillRect(0,0,S,S);
 
+  // Total block: eyebrow(26)+gap(44)+hl1(88)+hl2(88)+gap(36)+body1(34)+body2(34)+gap(60)+btn(60)+gap(52)+handle(26)
+  const totalH = 26+44+88+88+36+34+34+60+60+52+26;
+  let ty = (S - totalH) / 2;
+
   // eyebrow
-  ctx.font = dmSans(22, 500);
+  ctx.font = dmSans(21, 500);
   ctx.fillStyle = hex(LINEN, 0.42);
   ctx.textAlign = 'center';
-  ctx.letterSpacing = '3px';
-  ctx.fillText('PAIGELOVESPILATES.COM/DATABASE', S/2, 300);
+  ctx.letterSpacing = '2.5px';
+  ctx.fillText('PAIGELOVESPILATES.COM/DATABASE', S/2, ty + 22);
   ctx.letterSpacing = '0px';
+  ty += 26 + 44;
 
   // headline
-  ctx.font = playfair(76, 600);
+  ctx.font = playfair(80, 600);
   ctx.fillStyle = hex(LINEN, 1);
-  ctx.fillText('See how your city', S/2, 410);
-  ctx.fillText('stacks up.', S/2, 410 + 90);
+  ctx.fillText('See how your city', S/2, ty + 80); ty += 88;
+  ctx.fillText('stacks up.', S/2, ty + 80); ty += 88 + 36;
 
   // body
   ctx.font = dmSans(28, 300);
-  ctx.fillStyle = hex(LINEN, 0.58);
-  ctx.fillText('Curious how these stats look for other', S/2, 580);
-  ctx.fillText('cities? Join the free Studio Salary Database.', S/2, 580 + 40);
+  ctx.fillStyle = hex(LINEN, 0.55);
+  ctx.fillText('Curious how these stats look for other cities?', S/2, ty + 32); ty += 34;
+  ctx.fillText('Join the free Studio Salary Database.', S/2, ty + 32); ty += 34 + 60;
 
-  // CTA box
-  const btnText = 'JOIN THE DATABASE';
+  // CTA button
   ctx.font = dmSans(22, 500);
   ctx.letterSpacing = '3px';
-  const btnW = ctx.measureText(btnText).width + 80;
+  const btnText = 'JOIN THE DATABASE';
+  const btnW = ctx.measureText(btnText).width + 90;
   const btnX = S/2 - btnW/2;
-  const btnY = 670;
   ctx.strokeStyle = hex(LINEN, 0.32);
   ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.roundRect(btnX, btnY, btnW, 56, 2); ctx.stroke();
+  ctx.beginPath(); ctx.roundRect(btnX, ty, btnW, 60, 2); ctx.stroke();
   ctx.fillStyle = hex(LINEN, 1);
-  ctx.fillText(btnText, S/2, btnY + 36);
+  ctx.fillText(btnText, S/2, ty + 38);
   ctx.letterSpacing = '0px';
+  ty += 60 + 52;
 
   // handle
   ctx.font = dmSans(22, 400);
   ctx.fillStyle = hex(LINEN, 0.28);
   ctx.letterSpacing = '2px';
-  ctx.fillText('@paigelovespilates', S/2, 800);
+  ctx.fillText('@paigelovespilates', S/2, ty + 22);
   ctx.letterSpacing = '0px';
 
   ctx.textAlign = 'left';
