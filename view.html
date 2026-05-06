@@ -3,630 +3,483 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NY vs LA Carousel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>NY vs LA — Export Slides</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-–olive: #373930;
-–linen: #EDEBE4;
-–linen-dark: #E0DDD5;
-–olive-light: #4a4d40;
-–accent: #8B7355;
-}
-
-body {
-background: #2a2a2a;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
-font-family: ‘DM Sans’, sans-serif;
-padding: 24px;
-gap: 20px;
-}
-
-.carousel-wrapper {
-position: relative;
-width: 540px;
-height: 540px;
-}
-
-.slide {
-display: none;
-width: 540px;
-height: 540px;
-position: relative;
-overflow: hidden;
-}
-
-.slide.active { display: flex; }
-
-/* ── SLIDE LAYOUTS ── */
-
-/* Linen background slides */
-.slide-linen {
-background: var(–linen);
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 60px 56px;
-}
-
-/* Olive background slides */
-.slide-olive {
-background: var(–olive);
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 60px 56px;
-}
-
-/* ── SLIDE 1: Hook ── */
-.slide-1 {
-background: var(–linen);
-flex-direction: column;
-align-items: flex-start;
-justify-content: center;
-padding: 64px 60px;
-}
-
-.slide-1 .eyebrow {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-font-weight: 500;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-color: var(–olive);
-opacity: 0.45;
-margin-bottom: 28px;
-}
-
-.slide-1 h1 {
-font-family: ‘Playfair Display’, serif;
-font-size: 42px;
-font-weight: 600;
-line-height: 1.18;
-color: var(–olive);
-max-width: 380px;
-}
-
-.slide-1 h1 em {
-font-style: italic;
-color: var(–olive);
-opacity: 0.75;
-}
-
-.slide-1 .divider {
-width: 40px;
-height: 1px;
-background: var(–olive);
-opacity: 0.2;
-margin-top: 36px;
-}
-
-.slide-1 .handle {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-letter-spacing: 0.12em;
-color: var(–olive);
-opacity: 0.35;
-margin-top: 12px;
-}
-
-/* ── SLIDE 2: Intro ── */
-.slide-2 {
-background: var(–linen);
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 64px 60px;
-text-align: center;
-}
-
-.slide-2 .number {
-font-family: ‘Playfair Display’, serif;
-font-size: 100px;
-font-weight: 600;
-color: var(–olive);
-opacity: 0.06;
-line-height: 1;
-position: absolute;
-top: 40px;
-left: 50%;
-transform: translateX(-50%);
-white-space: nowrap;
-}
-
-.slide-2 .intro-label {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-font-weight: 500;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-color: var(–olive);
-opacity: 0.45;
-margin-bottom: 24px;
-}
-
-.slide-2 h2 {
-font-family: ‘Playfair Display’, serif;
-font-size: 32px;
-font-weight: 400;
-line-height: 1.3;
-color: var(–olive);
-}
-
-.slide-2 h2 em {
-font-style: italic;
-}
-
-.slide-2 .criteria {
-margin-top: 36px;
-display: flex;
-gap: 32px;
-}
-
-.slide-2 .criterion {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 8px;
-}
-
-.slide-2 .criterion-dot {
-width: 6px;
-height: 6px;
-border-radius: 50%;
-background: var(–accent);
-}
-
-.slide-2 .criterion-label {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 12px;
-font-weight: 400;
-color: var(–olive);
-opacity: 0.6;
-letter-spacing: 0.05em;
-}
-
-/* ── SLIDE 3: Pay ── */
-.slide-3 {
-background: var(–linen);
-flex-direction: column;
-align-items: flex-start;
-justify-content: center;
-padding: 64px 60px;
-}
-
-.slide-3 .topic-label {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-font-weight: 500;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-color: var(–olive);
-opacity: 0.45;
-margin-bottom: 20px;
-}
-
-.slide-3 .headline {
-font-family: ‘Playfair Display’, serif;
-font-size: 22px;
-font-weight: 400;
-color: var(–olive);
-opacity: 0.8;
-margin-bottom: 44px;
-line-height: 1.4;
-}
-
-.pay-row {
-display: flex;
-align-items: flex-end;
-gap: 48px;
-margin-bottom: 36px;
-}
-
-.pay-city {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
-
-.pay-city .city-name {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-font-weight: 500;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(–olive);
-opacity: 0.5;
-}
-
-.pay-city .amount {
-font-family: ‘Playfair Display’, serif;
-font-weight: 600;
-color: var(–olive);
-line-height: 1;
-}
-
-.pay-city.winner .amount {
-font-size: 72px;
-color: var(–olive);
-}
-
-.pay-city.loser .amount {
-font-size: 52px;
-color: var(–olive);
-opacity: 0.35;
-}
-
-.pay-city .winner-badge {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 10px;
-font-weight: 500;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: var(–olive);
-background: rgba(55,57,48,0.08);
-padding: 4px 10px;
-border-radius: 2px;
-display: inline-block;
-margin-top: 4px;
-width: fit-content;
-}
-
-.slide-3 .footnote {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-color: var(–olive);
-opacity: 0.35;
-letter-spacing: 0.04em;
-}
-
-/* ── SLIDE 4: Satisfaction ── */
-.slide-4 {
-background: var(–linen);
-flex-direction: column;
-align-items: flex-start;
-justify-content: center;
-padding: 64px 60px;
-}
-
-.slide-4 .topic-label {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-font-weight: 500;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-color: var(–olive);
-opacity: 0.45;
-margin-bottom: 20px;
-}
-
-.slide-4 .headline {
-font-family: ‘Playfair Display’, serif;
-font-size: 26px;
-font-weight: 600;
-color: var(–olive);
-line-height: 1.25;
-margin-bottom: 8px;
-}
-
-.slide-4 .subheadline {
-font-family: ‘Playfair Display’, serif;
-font-style: italic;
-font-size: 20px;
-font-weight: 400;
-color: var(–olive);
-opacity: 0.55;
-margin-bottom: 44px;
-}
-
-.sat-bars {
-display: flex;
-flex-direction: column;
-gap: 18px;
-width: 100%;
-}
-
-.sat-row {
-display: flex;
-flex-direction: column;
-gap: 6px;
-}
-
-.sat-row-top {
-display: flex;
-justify-content: space-between;
-align-items: baseline;
-}
-
-.sat-city {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-font-weight: 500;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-color: var(–olive);
-opacity: 0.55;
-}
-
-.sat-pct {
-font-family: ‘Playfair Display’, serif;
-font-size: 18px;
-font-weight: 600;
-color: var(–olive);
-}
-
-.sat-bar-track {
-width: 100%;
-height: 3px;
-background: rgba(55,57,48,0.1);
-border-radius: 2px;
-overflow: hidden;
-}
-
-.sat-bar-fill {
-height: 100%;
-border-radius: 2px;
-background: var(–olive);
-}
-
-.sat-bar-fill.dim { background: var(–olive); opacity: 0.25; }
-
-.slide-4 .footnote {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 10px;
-color: var(–olive);
-opacity: 0.35;
-margin-top: 28px;
-letter-spacing: 0.04em;
-}
-
-/* ── SLIDE 5: CTA ── */
-.slide-5 {
-background: var(–olive);
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 64px 60px;
-text-align: center;
-}
-
-.slide-5 .eyebrow {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-font-weight: 500;
-letter-spacing: 0.18em;
-text-transform: uppercase;
-color: var(–linen);
-opacity: 0.45;
-margin-bottom: 24px;
-}
-
-.slide-5 h2 {
-font-family: ‘Playfair Display’, serif;
-font-size: 34px;
-font-weight: 600;
-line-height: 1.2;
-color: var(–linen);
-margin-bottom: 16px;
-max-width: 360px;
-}
-
-.slide-5 p {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 14px;
-font-weight: 300;
-line-height: 1.6;
-color: var(–linen);
-opacity: 0.6;
-max-width: 320px;
-margin-bottom: 44px;
-}
-
-.slide-5 .cta-pill {
-border: 1px solid rgba(237,235,228,0.35);
-border-radius: 2px;
-padding: 14px 28px;
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-font-weight: 500;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(–linen);
-}
-
-.slide-5 .handle {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-letter-spacing: 0.12em;
-color: var(–linen);
-opacity: 0.3;
-margin-top: 40px;
-}
-
-/* ── NAV ── */
-.nav {
-display: flex;
-align-items: center;
-gap: 20px;
-}
-
-.nav button {
-background: var(–linen);
-border: none;
-border-radius: 2px;
-width: 40px;
-height: 40px;
-cursor: pointer;
-font-size: 16px;
-color: var(–olive);
-display: flex;
-align-items: center;
-justify-content: center;
-transition: opacity 0.2s;
-}
-
-.nav button:hover { opacity: 0.75; }
-.nav button:disabled { opacity: 0.25; cursor: default; }
-
-.dots {
-display: flex;
-gap: 6px;
-}
-
-.dot {
-width: 6px;
-height: 6px;
-border-radius: 50%;
-background: var(–linen);
-opacity: 0.25;
-transition: opacity 0.2s;
-}
-
-.dot.active { opacity: 1; }
-
-.slide-label {
-font-family: ‘DM Sans’, sans-serif;
-font-size: 11px;
-color: #999;
-letter-spacing: 0.1em;
-}
+  body {
+    background: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    padding: 24px 16px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    color-scheme: light;
+  }
+  h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .slide-block {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+  }
+  .dl-btn {
+    width: 100%;
+    padding: 13px;
+    background: #EDEBE4;
+    border: none;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #373930;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+  }
+  .slide-num {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #555;
+  }
+  #status {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 20px;
+    min-height: 18px;
+  }
 </style>
-
 </head>
 <body>
-
-<div class="carousel-wrapper">
-
-  <!-- SLIDE 1 -->
-
-  <div class="slide slide-1 active">
-    <div class="eyebrow">Studio Salary Database</div>
-    <h1>Is it better to be a Pilates instructor in <em>NY</em> or <em>LA</em>?</h1>
-    <div class="divider"></div>
-    <div class="handle">@paigelovespilates</div>
-  </div>
-
-  <!-- SLIDE 2 -->
-
-  <div class="slide slide-2">
-    <div class="number">02</div>
-    <div class="intro-label">The breakdown</div>
-    <h2>Let's look at the data.<br>We'll consider <em>average pay</em><br>and <em>instructor satisfaction.</em></h2>
-    <div class="criteria">
-      <div class="criterion">
-        <div class="criterion-dot"></div>
-        <div class="criterion-label">Pay per class</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-dot"></div>
-        <div class="criterion-label">Instructor satisfaction</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 3 -->
-
-  <div class="slide slide-3">
-    <div class="topic-label">Pay per class</div>
-    <div class="headline">When it comes to pay,<br>NYC wins.</div>
-    <div class="pay-row">
-      <div class="pay-city winner">
-        <div class="city-name">New York</div>
-        <div class="amount">$52</div>
-        <div class="winner-badge">↑ Winner</div>
-      </div>
-      <div class="pay-city loser">
-        <div class="city-name">Los Angeles</div>
-        <div class="amount">$48</div>
-      </div>
-    </div>
-    <div class="footnote">An 8% difference · avg per class</div>
-  </div>
-
-  <!-- SLIDE 4 -->
-
-  <div class="slide slide-4">
-    <div class="topic-label">Instructor satisfaction</div>
-    <div class="headline">New York instructors are happier<br>than almost anywhere in the world.</div>
-    <div class="subheadline">LA is… average.</div>
-    <div class="sat-bars">
-      <div class="sat-row">
-        <div class="sat-row-top">
-          <div class="sat-city">New York</div>
-          <div class="sat-pct">86%</div>
-        </div>
-        <div class="sat-bar-track"><div class="sat-bar-fill" style="width:86%"></div></div>
-      </div>
-      <div class="sat-row">
-        <div class="sat-row-top">
-          <div class="sat-city">Los Angeles</div>
-          <div class="sat-pct">80%</div>
-        </div>
-        <div class="sat-bar-track"><div class="sat-bar-fill dim" style="width:80%"></div></div>
-      </div>
-      <div class="sat-row">
-        <div class="sat-row-top">
-          <div class="sat-city">Global avg</div>
-          <div class="sat-pct">79%</div>
-        </div>
-        <div class="sat-bar-track"><div class="sat-bar-fill dim" style="width:79%"></div></div>
-      </div>
-    </div>
-    <div class="footnote">Based on instructor-reported studio ratings</div>
-  </div>
-
-  <!-- SLIDE 5 -->
-
-  <div class="slide slide-5">
-    <div class="eyebrow">Free resource</div>
-    <h2>See how your city stacks up.</h2>
-    <p>Curious how these stats look for other cities around the world? Join the free Studio Salary Database.</p>
-    <div class="cta-pill">Join the database</div>
-    <div class="handle">@paigelovespilates</div>
-  </div>
-
-</div>
-
-<!-- NAV -->
-
-<div class="nav">
-  <button id="prev" onclick="changeSlide(-1)" disabled>←</button>
-  <div class="dots">
-    <div class="dot active"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
-  <button id="next" onclick="changeSlide(1)">→</button>
-</div>
-<div class="slide-label" id="slide-label">Slide 1 of 5</div>
+<h1>NY vs LA · Export Slides</h1>
+<div id="status">Loading fonts…</div>
+<div id="slides-container"></div>
 
 <script>
-  let current = 0;
-  const slides = document.querySelectorAll('.slide');
-  const dots = document.querySelectorAll('.dot');
-  const prevBtn = document.getElementById('prev');
-  const nextBtn = document.getElementById('next');
-  const label = document.getElementById('slide-label');
+const OLIVE = '#373930';
+const LINEN = '#EDEBE4';
+const ACCENT = '#8B7355';
+const S = 1080;
 
-  function changeSlide(dir) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = Math.max(0, Math.min(slides.length - 1, current + dir));
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current === slides.length - 1;
-    label.textContent = `Slide ${current + 1} of ${slides.length}`;
+function hex(h, a=1) {
+  const r = parseInt(h.slice(1,3),16);
+  const g = parseInt(h.slice(3,5),16);
+  const b = parseInt(h.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function makeCanvas() {
+  const c = document.createElement('canvas');
+  c.width = S; c.height = S;
+  return c;
+}
+
+// ── text helpers ──
+function dmSans(size, weight=400) { return `${weight} ${size}px 'DM Sans', sans-serif`; }
+function playfair(size, weight=400, italic=false) {
+  return `${italic?'italic ':''} ${weight} ${size}px 'Playfair Display', serif`;
+}
+
+function wrapText(ctx, text, x, y, maxW, lineH) {
+  const words = text.split(' ');
+  let line = '';
+  let cy = y;
+  for (let w of words) {
+    const test = line ? line + ' ' + w : w;
+    if (ctx.measureText(test).width > maxW && line) {
+      ctx.fillText(line, x, cy);
+      line = w; cy += lineH;
+    } else { line = test; }
   }
+  if (line) ctx.fillText(line, x, cy);
+  return cy;
+}
+
+// ── SLIDE 1 ──
+function drawSlide1(canvas) {
+  const ctx = canvas.getContext('2d');
+  const pad = 108;
+  ctx.fillStyle = LINEN;
+  ctx.fillRect(0,0,S,S);
+
+  // eyebrow
+  ctx.font = dmSans(22, 500);
+  ctx.fillStyle = hex(OLIVE, 0.45);
+  ctx.letterSpacing = '4px';
+  ctx.fillText('STUDIO SALARY DATABASE', pad, pad + 20);
+  ctx.letterSpacing = '0px';
+
+  // headline — Playfair regular
+  const lines = [
+    { text: 'Is it better to be a', italic: false },
+    { text: 'Pilates instructor in', italic: false },
+    { text: 'NY', italic: true, inline: true, rest: ' or LA?' }
+  ];
+  let ty = pad + 100;
+  const lh = 88;
+
+  ctx.fillStyle = hex(OLIVE, 1);
+  ctx.font = playfair(76, 400, false);
+  ctx.fillText('Is it better to be a', pad, ty); ty += lh;
+  ctx.fillText('Pilates instructor in', pad, ty); ty += lh;
+
+  // "NY or LA?" with NY and LA italic
+  ctx.font = playfair(76, 400, false);
+  const beforeW = ctx.measureText('').width;
+  // draw "NY" italic
+  ctx.font = playfair(76, 400, true);
+  ctx.fillStyle = hex(OLIVE, 0.78);
+  ctx.fillText('NY', pad, ty);
+  const nyW = ctx.measureText('NY').width;
+
+  ctx.font = playfair(76, 400, false);
+  ctx.fillStyle = hex(OLIVE, 1);
+  ctx.fillText(' or ', pad + nyW, ty);
+  const orW = ctx.measureText(' or ').width;
+
+  ctx.font = playfair(76, 400, true);
+  ctx.fillStyle = hex(OLIVE, 0.78);
+  ctx.fillText('LA', pad + nyW + orW, ty);
+  const laW = ctx.measureText('LA').width;
+
+  ctx.font = playfair(76, 400, false);
+  ctx.fillStyle = hex(OLIVE, 1);
+  ctx.fillText('?', pad + nyW + orW + laW, ty);
+
+  ty += lh + 60;
+
+  // divider
+  ctx.fillStyle = hex(OLIVE, 0.18);
+  ctx.fillRect(pad, ty, 72, 2);
+  ty += 28;
+
+  // handle
+  ctx.font = dmSans(22, 400);
+  ctx.fillStyle = hex(OLIVE, 0.32);
+  ctx.letterSpacing = '2px';
+  ctx.fillText('@paigelovespilates', pad, ty + 22);
+  ctx.letterSpacing = '0px';
+}
+
+// ── SLIDE 2 ──
+function drawSlide2(canvas) {
+  const ctx = canvas.getContext('2d');
+  const pad = 108;
+  ctx.fillStyle = LINEN;
+  ctx.fillRect(0,0,S,S);
+
+  // ghost "02"
+  ctx.font = playfair(260, 600);
+  ctx.fillStyle = hex(OLIVE, 0.055);
+  ctx.textAlign = 'center';
+  ctx.fillText('02', S/2, 260);
+  ctx.textAlign = 'left';
+
+  // label
+  ctx.font = dmSans(22, 500);
+  ctx.fillStyle = hex(OLIVE, 0.45);
+  ctx.textAlign = 'center';
+  ctx.letterSpacing = '4px';
+  ctx.fillText('THE BREAKDOWN', S/2, 380);
+  ctx.letterSpacing = '0px';
+
+  // headline
+  const hl = 72;
+  ctx.font = playfair(64, 400, false);
+  ctx.fillStyle = hex(OLIVE, 1);
+  ctx.fillText("Let's look at the data.", S/2, 480);
+
+  ctx.fillText("We'll consider", S/2, 480 + hl);
+
+  // italic words inline
+  const line3y = 480 + hl*2;
+  const avgPay = 'average pay';
+  const and = ' and ';
+  const instrSat = 'instructor satisfaction.';
+
+  ctx.font = playfair(64, 400, true);
+  const apW = ctx.measureText(avgPay).width;
+  ctx.font = playfair(64, 400, false);
+  const andW = ctx.measureText(and).width;
+  ctx.font = playfair(64, 400, true);
+  const isW = ctx.measureText(instrSat).width;
+
+  const totalW = apW + andW + isW;
+  let lx = S/2 - totalW/2;
+
+  ctx.font = playfair(64, 400, true);
+  ctx.fillText(avgPay, lx, line3y); lx += apW;
+  ctx.font = playfair(64, 400, false);
+  ctx.fillText(and, lx, line3y); lx += andW;
+  ctx.font = playfair(64, 400, true);
+  ctx.fillText(instrSat, lx, line3y);
+
+  // criteria dots
+  const dotY = line3y + 90;
+  const labels = ['Pay per class', 'Instructor satisfaction'];
+  const spacing = 260;
+  const startX = S/2 - spacing/2 - 80;
+
+  labels.forEach((label, i) => {
+    const lx2 = startX + i * spacing;
+    // dot
+    ctx.beginPath();
+    ctx.arc(lx2 + 6, dotY, 7, 0, Math.PI*2);
+    ctx.fillStyle = ACCENT;
+    ctx.fill();
+    // label
+    ctx.font = dmSans(24, 400);
+    ctx.fillStyle = hex(OLIVE, 0.6);
+    ctx.textAlign = 'left';
+    ctx.fillText(label, lx2 + 22, dotY + 8);
+  });
+
+  ctx.textAlign = 'left';
+}
+
+// ── SLIDE 3 ──
+function drawSlide3(canvas) {
+  const ctx = canvas.getContext('2d');
+  const pad = 108;
+  ctx.fillStyle = LINEN;
+  ctx.fillRect(0,0,S,S);
+
+  // topic label
+  ctx.font = dmSans(22, 500);
+  ctx.fillStyle = hex(OLIVE, 0.45);
+  ctx.letterSpacing = '4px';
+  ctx.fillText('PAY PER CLASS', pad, pad + 20);
+  ctx.letterSpacing = '0px';
+
+  // headline
+  ctx.font = playfair(52, 400);
+  ctx.fillStyle = hex(OLIVE, 0.8);
+  ctx.fillText('When it comes to pay,', pad, pad + 110);
+  ctx.fillText('NYC wins.', pad, pad + 110 + 66);
+
+  // NYC big number
+  const numY = pad + 340;
+  ctx.font = dmSans(22, 500);
+  ctx.fillStyle = hex(OLIVE, 0.5);
+  ctx.letterSpacing = '3px';
+  ctx.fillText('NEW YORK', pad, numY - 36);
+  ctx.letterSpacing = '0px';
+
+  ctx.font = playfair(180, 600);
+  ctx.fillStyle = hex(OLIVE, 1);
+  ctx.fillText('$52', pad, numY);
+  const nycW = ctx.measureText('$52').width;
+
+  // winner badge
+  const bx = pad, by = numY + 18;
+  const btext = '↑  WINNER';
+  ctx.font = dmSans(20, 500);
+  ctx.letterSpacing = '2px';
+  const bw = ctx.measureText(btext).width + 28;
+  ctx.fillStyle = hex(OLIVE, 0.09);
+  ctx.beginPath();
+  ctx.roundRect(bx, by, bw, 38, 3);
+  ctx.fill();
+  ctx.fillStyle = hex(OLIVE, 0.7);
+  ctx.fillText(btext, bx + 14, by + 26);
+  ctx.letterSpacing = '0px';
+
+  // LA number
+  const laX = pad + 280;
+  ctx.font = dmSans(22, 500);
+  ctx.fillStyle = hex(OLIVE, 0.3);
+  ctx.letterSpacing = '3px';
+  ctx.fillText('LOS ANGELES', laX, numY - 36);
+  ctx.letterSpacing = '0px';
+
+  ctx.font = playfair(130, 600);
+  ctx.fillStyle = hex(OLIVE, 0.3);
+  ctx.fillText('$48', laX, numY);
+
+  // footnote
+  ctx.font = dmSans(22, 400);
+  ctx.fillStyle = hex(OLIVE, 0.35);
+  ctx.fillText('An 8% difference  ·  avg per class', pad, S - pad);
+}
+
+// ── SLIDE 4 ──
+function drawSlide4(canvas) {
+  const ctx = canvas.getContext('2d');
+  const pad = 108;
+  ctx.fillStyle = LINEN;
+  ctx.fillRect(0,0,S,S);
+
+  // topic label
+  ctx.font = dmSans(22, 500);
+  ctx.fillStyle = hex(OLIVE, 0.45);
+  ctx.letterSpacing = '4px';
+  ctx.fillText('INSTRUCTOR SATISFACTION', pad, pad + 20);
+  ctx.letterSpacing = '0px';
+
+  // headline (two lines)
+  ctx.font = playfair(52, 600);
+  ctx.fillStyle = hex(OLIVE, 1);
+  ctx.fillText('New York instructors are happier', pad, pad + 110);
+  ctx.fillText('than almost anywhere in the world.', pad, pad + 110 + 66);
+
+  // subheadline italic
+  ctx.font = playfair(44, 400, true);
+  ctx.fillStyle = hex(OLIVE, 0.52);
+  ctx.fillText('LA is… average.', pad, pad + 110 + 66 + 72);
+
+  // bars
+  const barData = [
+    { city: 'NEW YORK', pct: 86, dim: false },
+    { city: 'LOS ANGELES', pct: 80, dim: true },
+    { city: 'GLOBAL AVG', pct: 79, dim: true },
+  ];
+  const barW = S - pad*2;
+  let by = pad + 110 + 66 + 72 + 72;
+
+  barData.forEach(d => {
+    // city name
+    ctx.font = dmSans(22, 500);
+    ctx.fillStyle = hex(OLIVE, d.dim ? 0.35 : 0.55);
+    ctx.letterSpacing = '3px';
+    ctx.fillText(d.city, pad, by);
+    ctx.letterSpacing = '0px';
+
+    // percentage
+    ctx.font = playfair(40, 600);
+    ctx.fillStyle = hex(OLIVE, d.dim ? 0.35 : 1);
+    ctx.textAlign = 'right';
+    ctx.fillText(d.pct + '%', S - pad, by);
+    ctx.textAlign = 'left';
+
+    by += 14;
+
+    // track
+    ctx.fillStyle = hex(OLIVE, 0.1);
+    ctx.beginPath(); ctx.roundRect(pad, by, barW, 5, 2); ctx.fill();
+    // fill
+    ctx.fillStyle = hex(OLIVE, d.dim ? 0.22 : 0.85);
+    ctx.beginPath(); ctx.roundRect(pad, by, barW * d.pct/100, 5, 2); ctx.fill();
+
+    by += 60;
+  });
+
+  // footnote
+  ctx.font = dmSans(20, 400);
+  ctx.fillStyle = hex(OLIVE, 0.32);
+  ctx.fillText('Based on instructor-reported studio ratings', pad, S - pad);
+}
+
+// ── SLIDE 5 ──
+function drawSlide5(canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = OLIVE;
+  ctx.fillRect(0,0,S,S);
+
+  // eyebrow
+  ctx.font = dmSans(22, 500);
+  ctx.fillStyle = hex(LINEN, 0.42);
+  ctx.textAlign = 'center';
+  ctx.letterSpacing = '3px';
+  ctx.fillText('PAIGELOVESPILATES.COM/DATABASE', S/2, 300);
+  ctx.letterSpacing = '0px';
+
+  // headline
+  ctx.font = playfair(76, 600);
+  ctx.fillStyle = hex(LINEN, 1);
+  ctx.fillText('See how your city', S/2, 410);
+  ctx.fillText('stacks up.', S/2, 410 + 90);
+
+  // body
+  ctx.font = dmSans(28, 300);
+  ctx.fillStyle = hex(LINEN, 0.58);
+  ctx.fillText('Curious how these stats look for other', S/2, 580);
+  ctx.fillText('cities? Join the free Studio Salary Database.', S/2, 580 + 40);
+
+  // CTA box
+  const btnText = 'JOIN THE DATABASE';
+  ctx.font = dmSans(22, 500);
+  ctx.letterSpacing = '3px';
+  const btnW = ctx.measureText(btnText).width + 80;
+  const btnX = S/2 - btnW/2;
+  const btnY = 670;
+  ctx.strokeStyle = hex(LINEN, 0.32);
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.roundRect(btnX, btnY, btnW, 56, 2); ctx.stroke();
+  ctx.fillStyle = hex(LINEN, 1);
+  ctx.fillText(btnText, S/2, btnY + 36);
+  ctx.letterSpacing = '0px';
+
+  // handle
+  ctx.font = dmSans(22, 400);
+  ctx.fillStyle = hex(LINEN, 0.28);
+  ctx.letterSpacing = '2px';
+  ctx.fillText('@paigelovespilates', S/2, 800);
+  ctx.letterSpacing = '0px';
+
+  ctx.textAlign = 'left';
+}
+
+const drawFns = [drawSlide1, drawSlide2, drawSlide3, drawSlide4, drawSlide5];
+const slideNames = ['slide-1-hook', 'slide-2-breakdown', 'slide-3-pay', 'slide-4-satisfaction', 'slide-5-cta'];
+
+function buildSlides() {
+  const container = document.getElementById('slides-container');
+  const status = document.getElementById('status');
+  status.textContent = '';
+
+  drawFns.forEach((fn, i) => {
+    const block = document.createElement('div');
+    block.className = 'slide-block';
+
+    const label = document.createElement('div');
+    label.className = 'slide-num';
+    label.textContent = `Slide ${i+1} of 5`;
+
+    const canvas = makeCanvas();
+    fn(canvas);
+
+    const btn = document.createElement('a');
+    btn.className = 'dl-btn';
+    btn.textContent = `↓  Save Slide ${i+1}`;
+    btn.href = canvas.toDataURL('image/png');
+    btn.download = `${slideNames[i]}.png`;
+
+    block.appendChild(label);
+    block.appendChild(canvas);
+    block.appendChild(btn);
+    container.appendChild(block);
+  });
+}
+
+document.fonts.ready.then(() => {
+  // small delay to ensure fonts fully rendered
+  setTimeout(buildSlides, 200);
+});
 </script>
 
 </body>
